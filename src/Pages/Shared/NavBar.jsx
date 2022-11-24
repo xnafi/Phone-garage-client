@@ -7,7 +7,7 @@ const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const activeCss = `hover:border-b-2 border-text-info transition-all font-medium !text-accent tracking-wide duration-200 hover:!text-info`
     const inActiveCss = `hover:border-b-2 border-text-info transition-all !text-white font-medium tracking-wide duration-200 hover:!text-info`
-    const menu = [
+    const menu =
         <>
             <li li >
                 <NavLink
@@ -80,7 +80,7 @@ const NavBar = () => {
                 </NavLink>
             </li>
         </>
-    ]
+
     return (
         <div className='px-4 py-5 w-full mx-auto sm:max-w-full md:max-w-full lg:w-full md:px-24 lg:px-10'>
             <div className='relative flex items-center justify-between'>
