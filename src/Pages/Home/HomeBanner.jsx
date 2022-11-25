@@ -10,8 +10,8 @@ const HomeBanner = () => {
                 <span className='md:space-x-2 space-x-0 text-center text-sm md:text-base'> <TiTick className='inline text-2xl' />Maximum Value
                     <TiTick className='inline text-2xl' /> Safe & Hassle-free
                     <TiTick className='inline text-2xl' />Free Doorstep Pickup
-                </span>
-                <button className="btn glass my-5 block px-8">Buy Now</button>
+                </span> <br />
+                <a href='#brands' className="btn glass my-5 px-8">Buy Now</a>
             </div>
             <div className='lg:w-1/2 lg:h-1/2 w-full h-full'>
                 <img src={homeBanner} alt="" />

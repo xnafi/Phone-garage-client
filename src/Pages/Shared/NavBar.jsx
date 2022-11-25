@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 import logo from '../../assets/logo.jpg';
+import { AuthContext } from '../../Context/AuthProvider';
 
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const handleLogout = () => {
+        logOut()
+            .then(res => {
+                Swal.fire('Logout successfull')
+                navigate(from, { replace: true })
+            })
+    }
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location?.state?.from.pathname || '/'
     const activeCss = `hover:border-b-2 border-text-info transition-all font-medium !text-accent tracking-wide duration-200 hover:!text-info`
     const inActiveCss = `hover:border-b-2 border-text-info transition-all !text-white font-medium tracking-wide duration-200 hover:!text-info`
     const menu =
@@ -59,26 +72,39 @@ const NavBar = () => {
                     Contact
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to='/login'
-                    aria-label='About Us'
-                    title='About Us'
-                    className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                >
-                    Login
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to='/signup'
-                    aria-label='About Us'
-                    title='About Us'
-                    className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                >
-                    Sign up
-                </NavLink>
-            </li>
+            {
+                user ? <li>
+                    <NavLink
+                        onClick={handleLogout}
+                        className={inActiveCss}
+                    >
+                        Logout
+                    </NavLink>
+                </li> : <>
+                    <li>
+                        <NavLink
+                            to='/login'
+                            aria-label='About Us'
+                            title='About Us'
+                            className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                        >
+                            Login
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/signup'
+                            aria-label='About Us'
+                            title='About Us'
+                            className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                        >
+                            Sign up
+                        </NavLink>
+                    </li>
+                </>
+            }
+
+
         </>
 
     return (
