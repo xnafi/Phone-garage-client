@@ -62,53 +62,58 @@ const NavBar = () => {
                     Blog
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to='/contact'
-                    aria-label='About Us'
-                    title='About Us'
-                    className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                >
-                    Contact
-                </NavLink>
-            </li>
+
             {
-                user ? <li>
-                    <NavLink
-                        onClick={handleLogout}
-                        className={inActiveCss}
-                    >
-                        Logout
-                    </NavLink>
-                </li> : <>
-                    <li>
-                        <NavLink
-                            to='/login'
-                            aria-label='About Us'
-                            title='About Us'
-                            className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                        >
-                            Login
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to='/signup'
-                            aria-label='About Us'
-                            title='About Us'
-                            className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                        >
-                            Sign up
-                        </NavLink>
-                    </li>
-                </>
+                user ?
+                    <>
+                        <li>
+                            <NavLink
+                                to='/dashboard'
+                                aria-label='dashboard'
+                                title='dashboard'
+                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                            >
+                                Dashboard
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                onClick={handleLogout}
+                                className={inActiveCss}
+                            >
+                                Logout
+                            </NavLink>
+                        </li>
+                    </>
+                    : <>
+                        <li>
+                            <NavLink
+                                to='/login'
+                                aria-label='Login'
+                                title='Login'
+                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                            >
+                                Login
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to='/signup'
+                                aria-label='sign up'
+                                title='sign up'
+                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                            >
+                                Sign up
+                            </NavLink>
+                        </li>
+                    </>
             }
 
 
         </>
 
     return (
-        <div className='px-4 py-5 w-full mx-auto sm:max-w-full md:max-w-full lg:w-full md:px-24 lg:px-10'>
+        <div className='px-4 z-50 py-5 w-full mx-auto sm:max-w-full md:max-w-full lg:w-full md:px-24 lg:px-10'>
             <div className='relative flex items-center justify-between'>
                 <NavLink
                     to='/'
