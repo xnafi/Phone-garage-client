@@ -23,7 +23,7 @@ const Login = () => {
     const handleGoogleLogin = () => {
         signInWithGoogle()
             .then(res => {
-                Swal.fire('User created successfully')
+                Swal.fire('Login successfully')
                 navigate(from, { replace: true })
             })
             .catch(er => Swal.fire(er.message))

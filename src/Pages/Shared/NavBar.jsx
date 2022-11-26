@@ -116,7 +116,6 @@ const NavBar = () => {
         <div className='px-4 z-50 py-5 w-full mx-auto sm:max-w-full md:max-w-full lg:w-full md:px-24 lg:px-10'>
             <div className='relative flex items-center justify-between'>
                 <NavLink
-                    to='/'
                     aria-label='Scissors n razors'
                     title='Scissors n razors'
 
@@ -127,7 +126,7 @@ const NavBar = () => {
                 <ul className='items-center hidden space-x-8 lg:flex'>
                     {menu}
                 </ul>
-                <div className='lg:hidden'>
+                <div className='lg:hidden z-50'>
                     <button
                         aria-label='Open Menu'
                         title='Open Menu'

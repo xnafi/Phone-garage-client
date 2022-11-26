@@ -25,7 +25,7 @@ module.exports = {
           "warning": "#CC7314",
 
           "error": "#EE203F",
-          "textColour" : "#EEB1FC"
+          "textColour": "#EEB1FC"
         },
       }
     ]
@@ -35,5 +35,6 @@ module.exports = {
 
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),require('tailwind-scrollbar-hide')],
+
 }

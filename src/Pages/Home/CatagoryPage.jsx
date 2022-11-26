@@ -4,7 +4,7 @@ import Loading from '../Shared/Loading'
 import CatagoryCard from './CatagoryCard'
 
 const CatagoryPage = () => {
-    const { data: brands = [], isLoading } = useQuery({
+    const { data: brands = [], isLoading, refetch } = useQuery({
         queryKey: ['brands'],
         queryFn: async () => {
             const req = await fetch('http://localhost:5000/brands')

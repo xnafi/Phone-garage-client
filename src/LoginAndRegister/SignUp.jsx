@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from '../Context/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { reload } from 'firebase/auth';
 
 const SignUp = () => {
     const { createUserWithEmail, user, updateUser, signInWithGoogle } = useContext(AuthContext)
@@ -37,7 +38,8 @@ const SignUp = () => {
                         email: data.email,
                         image: image,
                         role: data.selectOption,
-                        isAdmin: false
+                        isAdmin: false,
+                        verify: false
                     }
                     axios.post('http://localhost:5000/users', newUser)
                         .then(res => {
@@ -53,6 +55,7 @@ const SignUp = () => {
                                     Swal.fire('User created successfully')
                                     reset()
                                     navigate(from, { replace: true })
+                                    window.location.reload(true);
                                 })
                                 .catch(er => Swal.fire(er.message))
                         })
@@ -77,6 +80,7 @@ const SignUp = () => {
                         if (res.data.acknowledged) {
                             Swal.fire('User created successfully')
                             navigate(from, { replace: true })
+                            window.location.reload(true);
                         }
                     })
             })

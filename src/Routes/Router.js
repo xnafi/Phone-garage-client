@@ -4,6 +4,8 @@ import Main from "../Layout/Main";
 import Login from "../LoginAndRegister/Login";
 import SignUp from "../LoginAndRegister/SignUp";
 import AddPhone from "../Pages/Dashboard/AddPhone";
+import Buyers from "../Pages/Dashboard/Buyers";
+import ManageMyList from "../Pages/Dashboard/ManageMyList";
 import MangeSellers from "../Pages/Dashboard/MangeSellers";
 import Sellers from "../Pages/Dashboard/Sellers";
 import Brand from "../Pages/Home/Brand";
@@ -42,8 +44,16 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
+                index: true,
+                element: <Sellers />
+            },
+            {
                 path: '/dashboard/sellers',
                 element: <Sellers />
+            },
+            {
+                path: '/dashboard/buyers',
+                element: <Buyers />
             },
             {
                 path: '/dashboard/addphone',
@@ -52,6 +62,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/managesellers',
                 element: <MangeSellers />
+            },
+            {
+                path: '/dashboard/managemylist',
+                element: <ManageMyList />
             },
         ]
     },
