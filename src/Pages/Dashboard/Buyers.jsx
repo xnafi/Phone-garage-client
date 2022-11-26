@@ -23,7 +23,7 @@ const Buyers = () => {
     if (isLoading) {
         return <Loading />
     }
-    const handleDelte = (user) => {
+    const handleDelete = (user) => {
         fetch(`http://localhost:5000/users/buyers/${user._id}`, {
             method: 'delete'
         })
@@ -72,8 +72,7 @@ const Buyers = () => {
                                                 <p>{user?.email}</p>
                                             </td>
                                             <td className="p-3 text-left">
-                                                <label onClick={() => setDeleteUser(user)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
-                                                {/* <button onClick={() => handleDelte(user._id)} className="px-3 btn-sm btn-warning py-1 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Delete</button> */}
+                                                <label onClick={() => setDeleteUser(user)} htmlFor="confirmation-modal" className="btn btn-sm btn-error cursor-pointer">Delete</label>
                                             </td>
                                         </tr>
                                     }
@@ -89,7 +88,7 @@ const Buyers = () => {
                 deleteUser && <ConfirmModal
                     title={`Are you sure you want to delete?`}
                     message={`If you delete ${deleteUser.name}. It cannot be undone.`}
-                    successAction={handleDelte}
+                    successAction={handleDelete}
                     successButtonName="Delete"
                     modalData={deleteUser}
                     closeModal={closeModal}

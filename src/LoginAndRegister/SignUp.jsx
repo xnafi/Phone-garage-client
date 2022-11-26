@@ -1,12 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../Context/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { reload } from 'firebase/auth';
+import Loading from '../Pages/Shared/Loading';
 
 const SignUp = () => {
+    const [loading, setLoading] = useState(false)
     const { createUserWithEmail, user, updateUser, signInWithGoogle } = useContext(AuthContext)
     const { register, handleSubmit, reset } = useForm();
     const location = useLocation()
@@ -22,6 +23,7 @@ const SignUp = () => {
     ]
 
     const onSubmit = (data) => {
+        setLoading(true)
         const formImage = data.image[0]
         const formData = new FormData()
         formData.append('image', formImage)
@@ -41,27 +43,35 @@ const SignUp = () => {
                         isAdmin: false,
                         verify: false
                     }
-                    axios.post('http://localhost:5000/users', newUser)
+
+
+                    createUserWithEmail(data.email, data.password)
                         .then(res => {
-                            if (!res.data.acknowledged) {
-                                return
-                            }
-                            createUserWithEmail(data.email, data.password)
-                                .then(res => {
-                                    console.log(res);
-                                    updateUser(data.name, image)
-                                        .then(() => { })
-                                        .catch(er => Swal.fire(er.message))
-                                    Swal.fire('User created successfully')
-                                    reset()
-                                    navigate(from, { replace: true })
-                                    window.location.reload(true);
-                                })
+                            console.log(res);
+                            updateUser(data.name, image)
+                                .then(() => { })
                                 .catch(er => Swal.fire(er.message))
+                            axios.post('http://localhost:5000/users', newUser)
+                                .then(res => {
+                                    if (res.data.acknowledged) {
+                                        Swal.fire('User created successfully')
+                                    }
+                                })
+                            reset()
+                            navigate(from, { replace: true })
+                            window.location.reload(true);
                         })
+                        .catch(er => {
+                            Swal.fire(er.message)
+                            setLoading(false)
+                        })
+
                 }
             })
-            .catch(er => Swal.fire(er.message))
+            .catch(er => {
+                Swal.fire(er.message)
+                setLoading(false)
+            })
     }
 
     const handleGoogleSignIn = () => {
@@ -85,6 +95,9 @@ const SignUp = () => {
                     })
             })
             .catch(er => Swal.fire(er.message))
+    }
+    if (loading) {
+        return <Loading />
     }
 
     return (
@@ -144,8 +157,8 @@ const SignUp = () => {
                 <p className="text-center sm:px-6 dark:text-gray-400 text-sm">Have an account?
                     <Link to='/login' rel="noopener noreferrer" href="#" className="underline dark:text-gray-100 pl-1">Login</Link>
                 </p>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

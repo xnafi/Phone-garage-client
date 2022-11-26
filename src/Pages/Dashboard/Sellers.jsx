@@ -1,10 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
+import ConfirmModal from '../ConfirmModal';
 import Loading from '../Shared/Loading'
 
 const Sellers = () => {
+    const [deleteSeller, setDeleteSeller] = useState(null);
 
-    const { data: users = [], isLoading } = useQuery({
+    const closeModal = () => {
+        setDeleteSeller(null);
+    }
+    const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/users/sellers`)
@@ -12,6 +17,17 @@ const Sellers = () => {
             return data
         }
     })
+    const handleDelete = (user) => {
+        fetch(`http://localhost:5000/users/sellers/${user._id}`, {
+            method: 'delete'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch()
+            })
+
+    }
     if (isLoading) {
         return <Loading />
     }
@@ -62,9 +78,7 @@ const Sellers = () => {
                                     }
                                 </td>
                                 <td className="p-3 text-center">
-                                    <span className="px-3 py-1 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">
-                                        <span>Delete</span>
-                                    </span>
+                                    <label onClick={() => setDeleteSeller(user)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
                                 </td>
                             </tr>)
                         }
@@ -72,6 +86,17 @@ const Sellers = () => {
                     </tbody>
                 </table>
             </div>
+            {
+                deleteSeller && <ConfirmModal
+                    title={`Are you sure you want to delete?`}
+                    message={`If you delete ${deleteSeller.name}. It cannot be undone.`}
+                    successAction={handleDelete}
+                    successButtonName="Delete"
+                    modalData={deleteSeller}
+                    closeModal={closeModal}
+                >
+                </ConfirmModal>
+            }
         </div>
     )
 }
