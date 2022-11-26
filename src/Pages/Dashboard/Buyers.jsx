@@ -19,10 +19,6 @@ const Buyers = () => {
         }
     })
 
-
-    if (isLoading) {
-        return <Loading />
-    }
     const handleDelete = (user) => {
         fetch(`http://localhost:5000/users/buyers/${user._id}`, {
             method: 'delete'
@@ -33,6 +29,10 @@ const Buyers = () => {
                 refetch()
             })
 
+    }
+
+    if (isLoading) {
+        return <Loading />
     }
     return (
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100 overflow-x-clip">

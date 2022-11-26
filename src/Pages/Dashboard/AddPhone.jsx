@@ -1,8 +1,17 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const AddPhone = () => {
 
+    const { user } = useContext(AuthContext)
+
+    const day = new Date().getDate()
+    const month = new Date().getMonth()
+    const year = new Date().getFullYear()
+    const currentDate = `${day}/${month}/${year}`
     const { register, handleSubmit, reset } = useForm();
 
     const option = [
@@ -29,8 +38,52 @@ const AddPhone = () => {
     ]
 
     const onSubmit = (data) => {
-        console.log(data.description)
+        const formImage = data.image[0]
+        const formData = new FormData()
+        formData.append('image', formImage)
+        fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB}`, {
+            method: 'post',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    const image = result.data.url
+                    const newItem = {
+                        email: user.email,
+                        name: data.brand,
+                        model: data.model,
+                        image: 'image',
+                        condition: data.condition,
+                        location: data.location,
+                        price: data.price,
+                        description: data.description,
+                        isSold: false,
+                        advertise: false,
+                        wishList: false,
+                        postDate: currentDate
+                    }
+                    fetch(`http://localhost:5000/items`, {
+                        method: 'post',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newItem)
+                    })
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res.acknowledged) {
+                                Swal.fire('Phone added successfully')
+                                reset()
+                            }
+                        })
+                }
+            })
+
+
+
     }
+
 
     return (
 
@@ -48,7 +101,7 @@ const AddPhone = () => {
                     </div>
                     <div className="space-y-1 text-sm">
                         <label for="Model" className="block dark:text-gray-400">Phone Model</label>
-                        <input type="text"  {...register("Model", { required: true })} id="Model" placeholder="Phone Model" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400 " />
+                        <input type="text"  {...register("model", { required: true })} id="Model" placeholder="Phone Model" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400 " />
                     </div>
                     <div className="space-y-1 text-sm text-gray-400">
                         <label for="image" className="block dark:text-gray-400">Product Image</label>
@@ -64,12 +117,12 @@ const AddPhone = () => {
                         </select>
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label for="Location" className="block dark:text-gray-400">Loction</label>
-                        <input type="text"  {...register("Location", { required: true })} id="Location" placeholder="Location" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <label for="Location" className="block dark:text-gray-400">Loctaion</label>
+                        <input type="text"  {...register("location", { required: true })} id="Location" placeholder="Location" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <div className="space-y-1 text-sm">
                         <label for="Price" className="block dark:text-gray-400">Price</label>
-                        <input type="number"  {...register("Price", { required: true })} id="Price" placeholder="Phone price" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <input type="number"  {...register("price", { required: true })} id="Price" placeholder="Phone price" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <div class="form-group mb-6">
                         <textarea
@@ -103,5 +156,6 @@ const AddPhone = () => {
 
     )
 }
+
 
 export default AddPhone
