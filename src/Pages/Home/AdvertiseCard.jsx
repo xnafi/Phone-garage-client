@@ -1,12 +1,13 @@
 import React from 'react'
 import { MdVerified } from "react-icons/md";
+import logo from '../../../src/assets/logo.jpg'
 
 const AdvertiseCard = () => {
     return (
         <div className="rounded-md shadow-md dark:bg-gray-900 bg-black dark:text-gray-100">
             <div className="flex items-center justify-between p-3">
                 <div className="flex items-center space-x-2">
-                    <img src="https://source.unsplash.com/50x50/?portrait" alt="" className="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-700" />
+                    <img src={logo} alt="" className="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-700" />
                     <div className="-space-y-1">
                         <h2 className="text-sm font-semibold leading-none">leroy_jenkins72</h2>
                         <span className="inline-block text-xs leading-none dark:text-gray-400">Somewhere</span>
@@ -16,7 +17,7 @@ const AdvertiseCard = () => {
                     <MdVerified />
                 </button>
             </div>
-            <img src="https://source.unsplash.com/301x301/?random" alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" />
+            <img src={logo} alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" />
             <div className="p-3">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
@@ -44,11 +45,6 @@ const AdvertiseCard = () => {
                 </div>
                 <div className="flex flex-wrap items-center pt-3 pb-1">
                     <div className="flex items-center space-x-2">
-                        <div className="flex -space-x-1">
-                            <img alt="" className="w-5 h-5 border rounded-full dark:bg-gray-500 dark:border-gray-800" src="https://source.unsplash.com/40x40/?portrait?1" />
-                            <img alt="" className="w-5 h-5 border rounded-full dark:bg-gray-500 dark:border-gray-800" src="https://source.unsplash.com/40x40/?portrait?2" />
-                            <img alt="" className="w-5 h-5 border rounded-full dark:bg-gray-500 dark:border-gray-800" src="https://source.unsplash.com/40x40/?portrait?3" />
-                        </div>
                         <span className="text-sm">Liked by
                             <span className="font-semibold">Mamba UI</span>and
                             <span className="font-semibold">86 others</span>

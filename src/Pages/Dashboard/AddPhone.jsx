@@ -7,7 +7,6 @@ import { AuthContext } from '../../Context/AuthProvider';
 const AddPhone = () => {
 
     const { user } = useContext(AuthContext)
-
     const day = new Date().getDate()
     const month = new Date().getMonth()
     const year = new Date().getFullYear()
@@ -50,10 +49,12 @@ const AddPhone = () => {
                 if (result.success) {
                     const image = result.data.url
                     const newItem = {
+                        userName: user?.displayName,
+                        userImage: user?.photoURL,
                         email: user.email,
                         name: data.brand,
                         model: data.model,
-                        image: 'image',
+                        image: image,
                         condition: data.condition,
                         location: data.location,
                         price: data.price,

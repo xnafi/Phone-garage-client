@@ -9,8 +9,8 @@ const Sellers = () => {
     const closeModal = () => {
         setDeleteSeller(null);
     }
-    const { data: users = [], isLoading, refetch } = useQuery({
-        queryKey: ['users'],
+    const { data: sellers = [], isLoading, refetch } = useQuery({
+        queryKey: ['sellers', 'sellers/:id'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/users/sellers`)
             const data = await res.json()
@@ -18,7 +18,7 @@ const Sellers = () => {
         }
     })
     const handleDelete = (user) => {
-        fetch(`http://localhost:5000/users/sellers/${user._id}`, {
+        fetch(`http://localhost:5000/users/sellers/${user?._id}`, {
             method: 'delete'
         })
             .then(res => res.json())
@@ -28,9 +28,10 @@ const Sellers = () => {
             })
 
     }
-    if (isLoading) {
-        return <Loading />
-    }
+    console.log(sellers);
+    // if (isLoading) {
+    //     return <Loading />
+    // }
 
     return (
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100">
@@ -50,7 +51,7 @@ const Sellers = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, i) => <tr key={users._id} className="border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-900">
+                            sellers.map((user, i) => <tr key={user._id} className="border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-900">
                                 <td className="p-3">
                                     <p>{i + 1}</p>
                                 </td>
@@ -88,8 +89,7 @@ const Sellers = () => {
             </div>
             {
                 deleteSeller && <ConfirmModal
-                    title={`Are you sure you want to delete?`}
-                    message={`If you delete ${deleteSeller.name}. It cannot be undone.`}
+                    title='Are you sure you want to delete the user?'
                     successAction={handleDelete}
                     successButtonName="Delete"
                     modalData={deleteSeller}
