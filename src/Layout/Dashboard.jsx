@@ -71,6 +71,16 @@ export const Dashboard = () => {
                                 Manage My List
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink
+                                to='/dashboard/reportitem'
+                                aria-label='Reported items'
+                                title='Reported items'
+                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                            >
+                                Reported items
+                            </NavLink>
+                        </li>
                     </ul>
 
                 </div>

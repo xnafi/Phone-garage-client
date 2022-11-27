@@ -5,6 +5,7 @@ import Loading from '../Shared/Loading'
 import Swal from 'sweetalert2'
 
 const Sellers = () => {
+
     const [deleteSeller, setDeleteSeller] = useState(null);
 
     const closeModal = () => {
@@ -35,13 +36,29 @@ const Sellers = () => {
     const handleVerify = (id) => {
 
         fetch(`http://localhost:5000/users/sellers/${id}`, {
-            method: 'put'
+            method: 'patch'
         })
             .then(res => res.json())
             .then(data => {
-                Swal.fire('Seller Verified')
-                console.log(data);
-                refetch()
+                if (data.acknowledged) {
+                    Swal.fire('Seller Verified')
+                    refetch()
+                }
+            })
+            .catch(er => console.log(er))
+
+    }
+    const handleVerifyAdmin = (email) => {
+        fetch(`http://localhost:5000/users/sellers/${email}`, {
+            method: 'patch'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    Swal.fire('Set seller as a admin')
+                    refetch()
+                }
+
             })
             .catch(er => console.log(er))
 
@@ -53,57 +70,61 @@ const Sellers = () => {
     return (
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100">
             <h2 className="mb-4 md:text-4xl sm:text-2xl font-semibold leading-tight">All Sellers</h2>
-            <div className="overflow-x-auto">
-                <table className="min-w-full text-xs">
-                    <thead className="dark:bg-gray-700">
-                        <tr className="text-left">
-                            <th className="p-3"></th>
-                            <th className="p-3">Image</th>
-                            <th className="p-3">Name</th>
-                            <th className="p-3">Email</th>
-                            <th className="p-3">Varify</th>
-                            <th className="p-3 text-center">Admin</th>
-                            <th className="p-3">Admin Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            sellers.map((user, i) => <tr key={user._id} className="border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-900">
-                                <td className="p-3">
-                                    <p>{i + 1}</p>
-                                </td>
-                                <td className="p-3">
-                                    <div className="avatar">
-                                        <div className="w-12 rounded-full">
-                                            <img src={user?.image} alt='' />
-                                        </div>
-                                    </div>
-                                </td>
-                                <td className="p-3">
-                                    <p>{user?.name}</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>{user?.email}</p>
-                                </td>
-                                <td className="p-3">
-                                    {
-                                        user?.verify === false ? <button onClick={() => handleVerify(user._id)} className='btn-sm' >Verify Now</button> : <button className='btn-sm disabled pointer-events-none'>Verified</button>
-                                    }
-                                </td>
-                                <td className="p-3 text-center">
-                                    {
-                                        user?.isAdmin === false ? <button className='btn-sm'>Make Admin</button> : <button className='btn-sm disabled pointer-events-none'>Admin</button>
-                                    }
-                                </td>
-                                <td className="p-3 text-center">
-                                    <label onClick={() => setDeleteSeller(user)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
-                                </td>
-                            </tr>)
-                        }
+            {
+                sellers.length == 0 ? <h2>No Item Reported</h2>
+                    : <div className="overflow-x-auto">
+                        <table className="min-w-full text-xs">
+                            <thead className="dark:bg-gray-700">
+                                <tr className="text-left">
+                                    <th className="p-3"></th>
+                                    <th className="p-3">Image</th>
+                                    <th className="p-3">Name</th>
+                                    <th className="p-3">Email</th>
+                                    <th className="p-3">Varify</th>
+                                    <th className="p-3 text-center">Admin</th>
+                                    <th className="p-3">Admin Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    sellers.map((user, i) => <tr key={user._id} className="border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-900">
+                                        <td className="p-3">
+                                            <p>{i + 1}</p>
+                                        </td>
+                                        <td className="p-3">
+                                            <div className="avatar">
+                                                <div className="w-12 rounded-full">
+                                                    <img src={user?.image} alt='' />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="p-3">
+                                            <p>{user?.name}</p>
+                                        </td>
+                                        <td className="p-3">
+                                            <p>{user?.email}</p>
+                                        </td>
+                                        <td className="p-3">
+                                            {
+                                                user?.verify === false ? <button onClick={() => handleVerify(user?._id)} className='btn-sm glass' >Verify Now</button> : <button className='btn-sm disabled pointer-events-none'>Verified</button>
+                                            }
+                                        </td>
+                                        <td className="p-3 text-center">
+                                            {
+                                                user?.isAdmin === false ? <button onClick={() => handleVerifyAdmin(user?.email)} className='btn-sm glass'>Make Admin</button> : <button className='btn-sm disabled pointer-events-none'>Admin</button>
+                                            }
+                                        </td>
+                                        <td className="p-3 text-center">
+                                            <label onClick={() => setDeleteSeller(user)} htmlFor="confirmation-modal" className="btn btn-sm glass">Delete</label>
+                                        </td>
+                                    </tr>)
+                                }
 
-                    </tbody>
-                </table>
-            </div>
+                            </tbody>
+                        </table>
+                    </div>
+            }
+
             {
                 deleteSeller && <ConfirmModal
                     title='Are you sure you want to delete the user?'

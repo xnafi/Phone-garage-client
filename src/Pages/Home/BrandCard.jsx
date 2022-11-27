@@ -1,10 +1,29 @@
 import React from 'react'
 import { MdVerified } from "react-icons/md";
+import Swal from 'sweetalert2';
 
 
 
 
 const BrandCard = ({ item }) => {
+
+
+
+    const handleAddWishList = (id) => {
+        fetch(`http://localhost:5000/items/${id}`, {
+            method: 'put',
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    return Swal.fire('Product report to admin')
+                } else {
+                    Swal.fire('Already report to admin')
+                }
+
+
+            })
+    }
 
     return (
         <div className="rounded-md shadow-md dark:bg-gray-900 bg-black dark:text-gray-100">
@@ -22,19 +41,17 @@ const BrandCard = ({ item }) => {
             </div>
             <img src={item?.image} alt="" className="object-cover object-center w-full h-72 dark:bg-gray-500" />
             <div className="p-3">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between uppercase">
                     <div className="flex items-center space-x-3">
                         <div className="flex items-center justify-center font-semibold">
                             <span className='text-bold'>Phone model : {item?.model}</span>
                         </div>
                     </div>
-                    <button type="button" title="Add to wishList" className="flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
-                            <path d="M424,496H388.75L256.008,381.19,123.467,496H88V16H424ZM120,48V456.667l135.992-117.8L392,456.5V48Z"></path>
-                        </svg>
+                    <button onClick={() => handleAddWishList(item._id)} type="button" title="Report to admin" className="flex items-center justify-center">
+                        <span className='glass rounded-md uppercase text-xs p-2'>report to admin</span>
                     </button>
                 </div>
-                <div className="flex items-center pb-1">
+                <div className="flex items-center uppercase">
                     <div className="flex flex-col">
                         <span className="text-sm font-md">
                             Condition : {item?.condition}
@@ -44,7 +61,7 @@ const BrandCard = ({ item }) => {
                         </span>
                     </div>
                 </div>
-                <div className="space-y-3 text-center">
+                <div className="space-y-3 text-center uppercase">
                     <p className="text-sm text-left">
                         Description : {item?.description}
                     </p>

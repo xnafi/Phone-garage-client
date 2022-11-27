@@ -6,9 +6,12 @@ import SignUp from "../LoginAndRegister/SignUp";
 import AddPhone from "../Pages/Dashboard/AddPhone";
 import Buyers from "../Pages/Dashboard/Buyers";
 import ManageMyList from "../Pages/Dashboard/ManageMyList";
+import ReportedItems from "../Pages/Dashboard/ReportedItems";
 import Sellers from "../Pages/Dashboard/Sellers";
+import Blog from "../Pages/Home/Blog";
 import Brand from "../Pages/Home/Brand";
 import HomePage from "../Pages/Home/HomePage";
+import MyBooking from "../Pages/Home/MyBooking";
 import ErrorPage from "../Pages/Shared/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 
@@ -24,7 +27,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/brand/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/brand/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/brand/${params.id}`),
                 element: <Brand />
             },
             {
@@ -34,6 +37,14 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp />
+            },
+            {
+                path: '/mybooking',
+                element: <PrivateRoute><MyBooking /></PrivateRoute>
+            },
+            {
+                path: '/blog',
+                element: <Blog />
             },
 
         ],
@@ -62,6 +73,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/managemylist',
                 element: <ManageMyList />
+            },
+            {
+                path: '/dashboard/reportitem',
+                element: <ReportedItems />
             },
         ]
     },

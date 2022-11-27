@@ -32,31 +32,29 @@ const NavBar = () => {
                     Home
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to='/news'
-                    aria-label='Shop'
-                    title='Shop'
-                    className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                >
-                    News
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to='/destination'
-                    aria-label='Cart'
-                    title='Cart'
-                    className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                >
-                    Destination
-                </NavLink>
-            </li>
+
+            {
+                user &&
+                <>
+                    <li>
+                        <NavLink
+                            to='/mybooking'
+                            aria-label='My booking'
+                            title='My booking'
+                            className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                        >
+                            My booking
+                        </NavLink>
+                    </li>
+                </>
+            }
+
+
             <li>
                 <NavLink
                     to='/blog'
-                    aria-label='About Us'
-                    title='About Us'
+                    aria-label='blog'
+                    title='blog'
                     className={({ isActive }) => isActive ? activeCss : inActiveCss}
                 >
                     Blog
