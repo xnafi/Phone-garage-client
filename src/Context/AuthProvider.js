@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unsubscribe()
     }
-  }, [])
+  }, [user])
 
 
   const values = { user, createUserWithEmail, signInWithGoogle, updateUser, logOut, loginWithEmail, loading }

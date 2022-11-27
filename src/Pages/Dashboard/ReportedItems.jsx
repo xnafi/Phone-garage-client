@@ -33,7 +33,7 @@ const ReportedItems = () => {
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100 overflow-x-clip">
             <h2 className="mb-4 md:text-4xl sm:text-2xl font-semibold leading-tight">Reported Items</h2>
             {
-                reportItem.length == 0 ? <h2>No Item Reported</h2>
+                reportItem.length == 0 ? <h2>No item reported</h2>
                     :
                     <div className="overflow-x-auto">
                         <table className="min-w-full text-xs">

@@ -12,7 +12,7 @@ const Sellers = () => {
         setDeleteSeller(null);
     }
     const { data: sellers = [], isLoading, refetch } = useQuery({
-        queryKey: ['sellers', 'sellers/:id'],
+        queryKey: ['sellers', 'id','email'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/users/sellers`)
             const data = await res.json()
@@ -21,7 +21,8 @@ const Sellers = () => {
     })
     const handleDelete = (user) => {
         fetch(`http://localhost:5000/users/sellers/${user?._id}`, {
-            method: 'delete'
+            method: 'delete',
+            headers: { 'content-type': 'application/json' }
         })
             .then(res => res.json())
             .then(data => {
@@ -36,10 +37,12 @@ const Sellers = () => {
     const handleVerify = (id) => {
 
         fetch(`http://localhost:5000/users/sellers/${id}`, {
-            method: 'patch'
+            method: 'post',
+            headers: { 'content-type': 'application/json' }
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 if (data.acknowledged) {
                     Swal.fire('Seller Verified')
                     refetch()
@@ -50,7 +53,8 @@ const Sellers = () => {
     }
     const handleVerifyAdmin = (email) => {
         fetch(`http://localhost:5000/users/sellers/${email}`, {
-            method: 'patch'
+            method: 'put',
+            headers: { 'content-type': 'application/json' }
         })
             .then(res => res.json())
             .then(data => {
@@ -71,7 +75,7 @@ const Sellers = () => {
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100">
             <h2 className="mb-4 md:text-4xl sm:text-2xl font-semibold leading-tight">All Sellers</h2>
             {
-                sellers.length == 0 ? <h2>No Item Reported</h2>
+                sellers.length == 0 ? <h2>No sellers</h2>
                     : <div className="overflow-x-auto">
                         <table className="min-w-full text-xs">
                             <thead className="dark:bg-gray-700">

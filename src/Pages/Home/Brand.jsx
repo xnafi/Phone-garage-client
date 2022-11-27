@@ -14,6 +14,7 @@ const Brand = ({ }) => {
             return data
         }
     })
+    console.log(name);
     console.log(data);
     return (
         <>

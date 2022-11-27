@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdVerified } from "react-icons/md";
 import Swal from 'sweetalert2';
+import BookingModal from '../Shared/BookingModal';
 
 
 
 
 const BrandCard = ({ item }) => {
 
-
-
+    const [modalItem, setModalItem] = useState({})
     const handleAddWishList = (id) => {
         fetch(`http://localhost:5000/items/${id}`, {
             method: 'put',
@@ -24,7 +24,9 @@ const BrandCard = ({ item }) => {
 
             })
     }
-
+    const handleModal = (item) => {
+        setModalItem(item)
+    }
     return (
         <div className="rounded-md shadow-md dark:bg-gray-900 bg-black dark:text-gray-100">
             <div className="flex items-center justify-between p-3">
@@ -68,13 +70,18 @@ const BrandCard = ({ item }) => {
                     <p className="text-xs text-right">
                         Post Date : {item?.postDate}
                     </p>
-
-                    <button className="btn glass my-5 px-8 mx-auto">Book Now</button>
+                    <label
+                        onClick={() => handleModal(item)}
+                        htmlFor="booking-modal"
+                        className="btn btn-primary text-white"
+                    >
+                        Book Now
+                    </label>
 
                 </div>
-
             </div>
-        </div>
+            <BookingModal modalItem={modalItem} />
+        </div >
     )
 }
 

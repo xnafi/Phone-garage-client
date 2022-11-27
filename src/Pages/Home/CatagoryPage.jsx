@@ -15,7 +15,7 @@ const CatagoryPage = () => {
     if (isLoading) {
         return <Loading />
     }
-    console.log(brands);
+
     return (
         <div className='my-20 px-4 lg:px-10' id='brands'>
             <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10 uppercase'>Choose your brand</h2>

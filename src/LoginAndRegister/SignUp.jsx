@@ -43,28 +43,27 @@ const SignUp = () => {
                         isAdmin: false,
                         verify: false
                     }
-
-
-                    createUserWithEmail(data.email, data.password)
+                    axios.post('http://localhost:5000/users', newUser)
                         .then(res => {
-                            console.log(res);
-                            updateUser(data.name, image)
-                                .then(() => { })
-                                .catch(er => Swal.fire(er.message))
-                            axios.post('http://localhost:5000/users', newUser)
-                                .then(res => {
-                                    if (res.data.acknowledged) {
+                            if (res.data.acknowledged) {
+                                createUserWithEmail(data.email, data.password)
+                                    .then(res => {
+                                        console.log(res);
+                                        updateUser(data.name, image)
+                                            .then(() => { })
+                                            .catch(er => Swal.fire(er.message))
                                         Swal.fire('User created successfully')
-                                    }
-                                })
-                            reset()
-                            navigate(from, { replace: true })
-                            window.location.reload(true);
+                                        reset()
+                                        navigate(from, { replace: true })
+                                    })
+                                    .catch(er => {
+                                        Swal.fire(er.message)
+                                        setLoading(false)
+                                    })
+                            }
                         })
-                        .catch(er => {
-                            Swal.fire(er.message)
-                            setLoading(false)
-                        })
+
+
 
                 }
             })
@@ -90,7 +89,6 @@ const SignUp = () => {
                         if (res.data.acknowledged) {
                             Swal.fire('User created successfully')
                             navigate(from, { replace: true })
-                            window.location.reload(true);
                         }
                     })
             })
