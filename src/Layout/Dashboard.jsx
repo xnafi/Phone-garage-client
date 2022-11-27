@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import {  NavLink, Outlet } from 'react-router-dom'
 import { AuthContext } from '../Context/AuthProvider'
 import Footer from '../Pages/Shared/Footer'
 import NavBar from '../Pages/Shared/NavBar'
@@ -69,16 +69,6 @@ export const Dashboard = () => {
                                 className={({ isActive }) => isActive ? activeCss : inActiveCss}
                             >
                                 Manage My List
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to='/dashboard/managesellers'
-                                aria-label='Manage Seller'
-                                title='Manage Seller'
-                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                            >
-                                Manage Seller
                             </NavLink>
                         </li>
                     </ul>

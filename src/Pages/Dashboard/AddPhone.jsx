@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
@@ -80,54 +80,61 @@ const AddPhone = () => {
                         })
                 }
             })
-
-
-
     }
+    const { data: currentUser = [] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const req = await fetch(`http://localhost:5000/users/${user.email}`)
+            const data = await req.json()
+            return data
+        }
 
-
+    })
+    console.log(currentUser);
     return (
+        <>
+            <div className='flex z-30 flex-col'>
+                {
+                    currentUser.verify === false && <h2 className='text-2xl font-bold text-warning my-4'>Please wait admin need to verify</h2>
+                }
+                <div className="w-full max-w-md md:p-8 p-2 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 bg-neutral">
+                    <form onSubmit={handleSubmit(onSubmit)} noValidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid text-gray-400">
+                        <div className="dropdown w-full space-y-1 text-sm text-gray-400">
+                            <label for="role" className="block dark:text-gray-400">Select Brand</label>
+                            <select {...register("brand", { required: true })} className="select w-full bg-white">
+                                {
+                                    brands.map(sp => <option key={sp._id}>{sp.brand}</option>)
+                                }
+                            </select>
+                        </div>
+                        <div className="space-y-1 text-sm">
+                            <label for="Model" className="block dark:text-gray-400">Phone Model</label>
+                            <input type="text"  {...register("model", { required: true })} id="Model" placeholder="Phone Model" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400 " />
+                        </div>
+                        <div className="space-y-1 text-sm text-gray-400">
+                            <label for="image" className="block dark:text-gray-400">Product Image</label>
+                            <input type="file"  {...register("image", { required: true })} className="file-input file-input-bordered w-full px-4 bg-white rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400 " />
+                        </div>
+                        <div className="dropdown w-full space-y-1 text-sm text-gray-400">
+                            <label for="role" className="block dark:text-gray-400">Condition</label>
+                            <select {...register("condition", { required: true })} className="select w-full bg-white">
+                                {
+                                    option.map(sp => <option key={sp._id}>{sp.condition}</option>)
 
-        <div className='md:my-20 my-10 flex z-30'>
-            <div className="w-full max-w-md md:p-8 p-2 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 bg-neutral">
-                <form onSubmit={handleSubmit(onSubmit)} noValidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid text-gray-400">
-                    <div className="dropdown w-full space-y-1 text-sm text-gray-400">
-                        <label for="role" className="block dark:text-gray-400">Select Brand</label>
-                        <select {...register("brand", { required: true })} className="select w-full bg-white">
-                            {
-                                brands.map(sp => <option key={sp._id}>{sp.brand}</option>)
-
-                            }
-                        </select>
-                    </div>
-                    <div className="space-y-1 text-sm">
-                        <label for="Model" className="block dark:text-gray-400">Phone Model</label>
-                        <input type="text"  {...register("model", { required: true })} id="Model" placeholder="Phone Model" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400 " />
-                    </div>
-                    <div className="space-y-1 text-sm text-gray-400">
-                        <label for="image" className="block dark:text-gray-400">Product Image</label>
-                        <input type="file"  {...register("image", { required: true })} className="file-input file-input-bordered w-full px-4 bg-white rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400 " />
-                    </div>
-                    <div className="dropdown w-full space-y-1 text-sm text-gray-400">
-                        <label for="role" className="block dark:text-gray-400">Condition</label>
-                        <select {...register("condition", { required: true })} className="select w-full bg-white">
-                            {
-                                option.map(sp => <option key={sp._id}>{sp.condition}</option>)
-
-                            }
-                        </select>
-                    </div>
-                    <div className="space-y-1 text-sm">
-                        <label for="Location" className="block dark:text-gray-400">Loctaion</label>
-                        <input type="text"  {...register("location", { required: true })} id="Location" placeholder="Location" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
-                    </div>
-                    <div className="space-y-1 text-sm">
-                        <label for="Price" className="block dark:text-gray-400">Price</label>
-                        <input type="number"  {...register("price", { required: true })} id="Price" placeholder="Phone price" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
-                    </div>
-                    <div class="form-group mb-6">
-                        <textarea
-                            className=" form-control
+                                }
+                            </select>
+                        </div>
+                        <div className="space-y-1 text-sm">
+                            <label for="Location" className="block dark:text-gray-400">Loctaion</label>
+                            <input type="text"  {...register("location", { required: true })} id="Location" placeholder="Location" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        </div>
+                        <div className="space-y-1 text-sm">
+                            <label for="Price" className="block dark:text-gray-400">Price</label>
+                            <input type="number"  {...register("price", { required: true })} id="Price" placeholder="Phone price" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        </div>
+                        <div class="form-group mb-6">
+                            <textarea
+                                className=" form-control
                                     block
                                     w-full
                                     px-3
@@ -144,16 +151,22 @@ const AddPhone = () => {
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
  
                                 "
-                            id="exampleFormControlTextarea13"
-                            rows="3"
-                            placeholder="Description"
-                            {...register("description", { required: true })}
-                        ></textarea>
-                    </div>
-                    <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400 btn glass">Add</button>
-                </form>
+                                id="exampleFormControlTextarea13"
+                                rows="3"
+                                placeholder="Description"
+                                {...register("description", { required: true })}
+                            ></textarea>
+                        </div>
+                        {
+
+                            currentUser.verify === false ? <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400 btn glass" disabled>Add</button> :
+                                <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400 btn glass">Add</button>
+                        }
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
+
 
     )
 }

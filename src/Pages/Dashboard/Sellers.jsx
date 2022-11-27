@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
 import ConfirmModal from '../ConfirmModal';
 import Loading from '../Shared/Loading'
+import Swal from 'sweetalert2'
 
 const Sellers = () => {
     const [deleteSeller, setDeleteSeller] = useState(null);
@@ -23,15 +24,31 @@ const Sellers = () => {
         })
             .then(res => res.json())
             .then(data => {
+                refetch()
+                Swal.fire('User deleted')
+            })
+            .catch(er => console.log(er))
+
+
+    }
+
+    const handleVerify = (id) => {
+
+        fetch(`http://localhost:5000/users/sellers/${id}`, {
+            method: 'put'
+        })
+            .then(res => res.json())
+            .then(data => {
+                Swal.fire('Seller Verified')
                 console.log(data);
                 refetch()
             })
+            .catch(er => console.log(er))
 
     }
-    console.log(sellers);
-    // if (isLoading) {
-    //     return <Loading />
-    // }
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100">
@@ -58,7 +75,7 @@ const Sellers = () => {
                                 <td className="p-3">
                                     <div className="avatar">
                                         <div className="w-12 rounded-full">
-                                            <img src={user?.image} />
+                                            <img src={user?.image} alt='' />
                                         </div>
                                     </div>
                                 </td>
@@ -70,7 +87,7 @@ const Sellers = () => {
                                 </td>
                                 <td className="p-3">
                                     {
-                                        user?.verify === false ? <button className='btn-sm'>Verify Now</button> : <button className='btn-sm disabled pointer-events-none'>Verified</button>
+                                        user?.verify === false ? <button onClick={() => handleVerify(user._id)} className='btn-sm' >Verify Now</button> : <button className='btn-sm disabled pointer-events-none'>Verified</button>
                                     }
                                 </td>
                                 <td className="p-3 text-center">

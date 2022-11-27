@@ -6,7 +6,6 @@ import SignUp from "../LoginAndRegister/SignUp";
 import AddPhone from "../Pages/Dashboard/AddPhone";
 import Buyers from "../Pages/Dashboard/Buyers";
 import ManageMyList from "../Pages/Dashboard/ManageMyList";
-import MangeSellers from "../Pages/Dashboard/MangeSellers";
 import Sellers from "../Pages/Dashboard/Sellers";
 import Brand from "../Pages/Home/Brand";
 import HomePage from "../Pages/Home/HomePage";
@@ -59,10 +58,6 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/addphone',
                 element: <AddPhone />
-            },
-            {
-                path: '/dashboard/managesellers',
-                element: <MangeSellers />
             },
             {
                 path: '/dashboard/managemylist',
