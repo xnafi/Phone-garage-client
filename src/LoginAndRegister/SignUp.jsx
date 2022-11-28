@@ -8,7 +8,7 @@ import Loading from '../Pages/Shared/Loading';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
-    const { createUserWithEmail, user, updateUser, signInWithGoogle } = useContext(AuthContext)
+    const { createUserWithEmail, user, updateUser, signInWithGoogle} = useContext(AuthContext)
     const { register, handleSubmit, reset } = useForm();
     const location = useLocation()
     const navigate = useNavigate()
@@ -21,7 +21,6 @@ const SignUp = () => {
             name: "seller"
         }
     ]
-
     const onSubmit = (data) => {
         setLoading(true)
         const formImage = data.image[0]
@@ -62,9 +61,6 @@ const SignUp = () => {
                                     })
                             }
                         })
-
-
-
                 }
             })
             .catch(er => {

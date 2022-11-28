@@ -1,21 +1,46 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Context/AuthProvider';
+import Loading from './Loading';
 
 const BookingModal = ({ modalItem }) => {
-    console.log('====================================');
-    console.log(modalItem);
-    console.log('====================================');
-    const { user } = useContext(AuthContext)
 
-    // const price = 'Price' + ${ modalItem?.price }
-    // console.log("🚀 ~ file: BookingModal.jsx ~ line 13 ~ BookingModal ~ price", price)
+    const { user, loading } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+
     const handleBooking = event => {
+        event.preventDefault()
 
+        const newBooking = {
+            bookingUserEmail: user?.email,
+            productName: modalItem?.name,
+            productImage: modalItem?.image,
+            productModel: modalItem?.model,
+            productId: modalItem?._id,
+            productPrice: modalItem?.price,
+            bookingUserNumber: event.target.number
+        }
+        fetch(`http://localhost:5000/booking`, {
+            method: 'post',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(newBooking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    Swal.fire('Item booked successfully')
+                    event.target.reset()
+                    navigate('/mybooking')
+                }
+            })
 
     }
-
+    if (loading) {
+        return <Loading />
+    }
+    console.log(modalItem);
     return (
         <>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -31,7 +56,7 @@ const BookingModal = ({ modalItem }) => {
                         <input name="text" defaultValue={modalItem?.model} readOnly type="text" required placeholder="Phone Model" className="input w-full input-bordered" />
                         <input name="text" defaultValue={modalItem?.price} readOnly type="text" required placeholder="Phone Price" className="input w-full input-bordered" />
                         <input name="text" type="text" required placeholder="Meet location" className="input w-full input-bordered" />
-                        <input name="phone" type="text" required placeholder="Phone Number" className="input w-full input-bordered" />
+                        <input name="phone" type="number" required placeholder="Phone Number" className="input w-full input-bordered" />
                         <br />
                         {
                             user ? <input className='btn btn-accent w-full' type="submit" value="Submit" /> : <Link to="/login" className='btn btn-accent w-full'>Please Login First</Link>

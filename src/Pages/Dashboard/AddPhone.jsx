@@ -60,8 +60,8 @@ const AddPhone = () => {
                         price: data.price,
                         description: data.description,
                         isSold: false,
-                        advertise: false,
                         wishList: false,
+                        advertise: true,
                         postDate: currentDate
                     }
                     fetch(`http://localhost:5000/items`, {

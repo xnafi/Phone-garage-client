@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { MdVerified } from "react-icons/md";
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../Context/AuthProvider';
 import BookingModal from '../Shared/BookingModal';
 
 
 
 
 const BrandCard = ({ item }) => {
-
+    const { user } = useContext(AuthContext)
     const [modalItem, setModalItem] = useState({})
     const handleAddWishList = (id) => {
         fetch(`http://localhost:5000/items/${id}`, {
@@ -24,9 +25,11 @@ const BrandCard = ({ item }) => {
 
             })
     }
+  
     const handleModal = (item) => {
         setModalItem(item)
     }
+    console.log(modalItem)
     return (
         <div className="rounded-md shadow-md dark:bg-gray-900 bg-black dark:text-gray-100">
             <div className="flex items-center justify-between p-3">

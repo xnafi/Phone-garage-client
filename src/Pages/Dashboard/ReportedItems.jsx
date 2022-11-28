@@ -12,14 +12,14 @@ const ReportedItems = () => {
     const { data: reportItem = [], refetch } = useQuery({
         queryKey: ['item'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/items/report`)
+            const res = await fetch(`http://localhost:5000/items`)
             const data = await res.json()
             return data
         }
     })
-
+    console.log(reportItem);
     const handleDelete = (user) => {
-        fetch(`http://localhost:5000/items/report/${user._id}`, {
+        fetch(`http://localhost:5000/items/${user._id}`, {
             method: 'delete'
         })
             .then(res => res.json())
@@ -33,7 +33,7 @@ const ReportedItems = () => {
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100 overflow-x-clip">
             <h2 className="mb-4 md:text-4xl sm:text-2xl font-semibold leading-tight">Reported Items</h2>
             {
-                reportItem.length == 0 ? <h2>No item reported</h2>
+                reportItem.length === 0 ? <h2>No item reported</h2>
                     :
                     <div className="overflow-x-auto">
                         <table className="min-w-full text-xs">
@@ -49,8 +49,8 @@ const ReportedItems = () => {
                             <tbody>
                                 {
                                     reportItem.map((user, i) =>
+                                        user.report &&
                                         <>
-
                                             <tr key={user._id} className="border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-900">
                                                 <td className="p-3">
                                                     <p>{user.name}</p>

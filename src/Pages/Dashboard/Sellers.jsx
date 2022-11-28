@@ -35,7 +35,6 @@ const Sellers = () => {
     }
 
     const handleVerify = (id) => {
-
         fetch(`http://localhost:5000/users/sellers/${id}`, {
             method: 'post',
             headers: { 'content-type': 'application/json' }

@@ -15,7 +15,7 @@ const ManageMyList = () => {
     const { data: myItems = [], refetch, isLoading } = useQuery({
         queryKey: ['email'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/items/${user?.email}`)
+            const res = await fetch(`http://localhost:5000/items?email=${user?.email}`)
             const data = await res.json()
             return data
         }
@@ -33,7 +33,19 @@ const ManageMyList = () => {
             })
 
     }
-    console.log(myItems);
+
+    const handleAdvertisc = (id) => {
+        fetch(`http://localhost:5000/items/${id}`, {
+            method: 'post',
+            headers: { 'content-type': 'application/json' },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch()
+            })
+
+    }
     if (isLoading) {
         return <Loading />
     }
@@ -41,7 +53,7 @@ const ManageMyList = () => {
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100 overflow-x-clip">
             <h2 className="mb-4 md:text-4xl sm:text-2xl font-semibold leading-tight">Manage items</h2>
             {
-                myItems.length == 0 ? <h2>No item added</h2>
+                myItems.length === 0 ? <h2>No item added</h2>
                     : <div className="overflow-x-auto">
                         <table className="min-w-full text-xs">
                             <thead className="dark:bg-gray-700">
@@ -63,7 +75,7 @@ const ManageMyList = () => {
                                                 </td>
                                                 <td className="p-3">
                                                     {
-                                                        item?.advertise === false ? <p>Click to promote</p> : <p>Promoted</p>
+                                                        item?.advertise === false ? <button onClick={() => handleAdvertisc(item._id)} className='btn btn-xs glass'>Click to promote</button> : <p>Promoted</p>
                                                     }
                                                 </td>
                                                 <td className="p-3">
