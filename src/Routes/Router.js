@@ -12,6 +12,7 @@ import Blog from "../Pages/Home/Blog";
 import Brand from "../Pages/Home/Brand";
 import HomePage from "../Pages/Home/HomePage";
 import MyBooking from "../Pages/Home/MyBooking";
+import Payment from "../Pages/Payment/Payment";
 import ErrorPage from "../Pages/Shared/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 
@@ -45,6 +46,11 @@ export const router = createBrowserRouter([
             {
                 path: '/blog',
                 element: <Blog />
+            },
+            {
+                path: '/payment/:id',
+                loader: ({params}) =>fetch(`http://localhost:5000/booking/${params.id}`),
+                element: <Payment />
             },
 
         ],

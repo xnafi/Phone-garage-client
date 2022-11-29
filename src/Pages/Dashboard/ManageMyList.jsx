@@ -110,6 +110,7 @@ const ManageMyList = () => {
                 </ConfirmModal>
             }
         </div>
+    
     )
 }
 

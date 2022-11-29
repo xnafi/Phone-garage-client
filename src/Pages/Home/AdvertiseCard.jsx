@@ -9,7 +9,6 @@ const AdvertiseCard = ({ ad }) => {
    
 
     return (
-
         <>
             {
                 <div className="rounded-md shadow-md dark:bg-gray-900 bg-black dark:text-gray-100">
@@ -56,9 +55,6 @@ const AdvertiseCard = ({ ad }) => {
                             <p className="text-xs text-right">
                                 Post Date : {ad?.postDate}
                             </p>
-
-                            <button className="btn glass my-5 px-8 mx-auto">Book Now</button>
-
                         </div>
 
                     </div>

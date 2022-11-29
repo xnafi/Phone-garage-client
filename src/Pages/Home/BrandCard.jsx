@@ -85,6 +85,7 @@ const BrandCard = ({ item }) => {
             </div>
             <BookingModal modalItem={modalItem} />
         </div >
+   
     )
 }
 

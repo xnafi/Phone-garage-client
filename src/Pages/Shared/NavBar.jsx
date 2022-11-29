@@ -82,6 +82,13 @@ const NavBar = () => {
                                 Logout
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink className="avatar" title={user?.displayName}>
+                                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <img src={user?.photoURL} />
+                                </div>
+                            </NavLink>
+                        </li>
                     </>
                     : <>
                         <li>

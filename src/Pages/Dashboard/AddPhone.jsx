@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Context/AuthProvider';
 
@@ -59,9 +60,9 @@ const AddPhone = () => {
                         location: data.location,
                         price: data.price,
                         description: data.description,
-                        isSold: false,
+                        isSold: 'notSold',
                         wishList: false,
-                        advertise: true,
+                        advertise: false,
                         postDate: currentDate
                     }
                     fetch(`http://localhost:5000/items`, {
