@@ -1,14 +1,30 @@
-import React, { useContext } from 'react'
-import {  NavLink, Outlet } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Navigate, NavLink, Outlet } from 'react-router-dom'
 import { AuthContext } from '../Context/AuthProvider'
 import Footer from '../Pages/Shared/Footer'
 import NavBar from '../Pages/Shared/NavBar'
 
 
 export const Dashboard = () => {
+
+
+    const [currentUser, setCurrentUser] = useState(null)
     const { user } = useContext(AuthContext)
+
+    useEffect(() => {
+        if (user?.email) {
+            fetch(`http://localhost:5000/users/${user?.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setCurrentUser(data)
+                })
+
+        }
+    }, [user])
     const activeCss = `hover:border-b-2 border-text-info transition-all font-medium !text-accent tracking-wide duration-200 hover:!text-info`
     const inActiveCss = `hover:border-b-2 border-text-info transition-all !text-white font-medium tracking-wide duration-200 hover:!text-info`
+
+
     return (
 
         <>
@@ -31,26 +47,31 @@ export const Dashboard = () => {
                 <div className="drawer-side z-30">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
                     <ul className="menu p-4 w-80 bg-base-100">
-                        <li>
-                            <NavLink
-                                to='/dashboard/sellers'
-                                aria-label=' All Sellers'
-                                title=' All Sellers'
-                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                            >
-                                All Sellers
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to='/dashboard/buyers'
-                                aria-label='All Buyers'
-                                title='All Buyers'
-                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                            >
-                                All Buyers
-                            </NavLink>
-                        </li>
+                        {
+                            !currentUser?.role === 'seller' ? <Navigate to='/login' /> : <>
+                                <li>
+                                    <NavLink
+                                        to='/dashboard/sellers'
+                                        aria-label=' All Sellers'
+                                        title=' All Sellers'
+                                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                                    >
+                                        All Sellers
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to='/dashboard/buyers'
+                                        aria-label='All Buyers'
+                                        title='All Buyers'
+                                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                                    >
+                                        All Buyers
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
+
                         <li>
                             <NavLink
                                 to='/dashboard/addphone'

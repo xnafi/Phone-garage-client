@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/mybooking',
-                element: <PrivateRoute><MyBooking /></PrivateRoute>
+                element: <MyBooking />
             },
             {
                 path: '/blog',
@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Sellers />
+                element:<Sellers />
             },
             {
                 path: '/dashboard/sellers',
@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/buyers',
-                element: <Buyers />
+                element:<Buyers />
             },
             {
                 path: '/dashboard/addphone',

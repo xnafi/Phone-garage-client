@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import logo from '../../assets/logo.jpg';
 import { AuthContext } from '../../Context/AuthProvider';
 
 
 const NavBar = () => {
+    const [currentUser, setCurrentUser] = useState(null)
     const { user, logOut } = useContext(AuthContext)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const handleLogout = () => {
@@ -15,6 +17,18 @@ const NavBar = () => {
                 navigate(from, { replace: true })
             })
     }
+    useEffect(() => {
+        if (user?.email) {
+            fetch(`http://localhost:5000/users/${user?.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setCurrentUser(data)
+                })
+
+        }
+    }, [user])
+
+
     const location = useLocation()
     const navigate = useNavigate()
     const from = location?.state?.from.pathname || '/'
@@ -48,8 +62,6 @@ const NavBar = () => {
                     </li>
                 </>
             }
-
-
             <li>
                 <NavLink
                     to='/blog'
@@ -60,20 +72,38 @@ const NavBar = () => {
                     Blog
                 </NavLink>
             </li>
+            {
+                currentUser?.isAdmin === true &&
+                <li>
+                    <NavLink
+                        to='/dashboard'
+                        aria-label='dashboard'
+                        title='dashboard'
+                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
+
+            }
+            {
+                currentUser?.role === 'seller' &&
+                <li>
+                    <NavLink
+                        to='/dashboard'
+                        aria-label='dashboard'
+                        title='dashboard'
+                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
+
+            }
 
             {
                 user ?
                     <>
-                        <li>
-                            <NavLink
-                                to='/dashboard'
-                                aria-label='dashboard'
-                                title='dashboard'
-                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                            >
-                                Dashboard
-                            </NavLink>
-                        </li>
                         <li>
                             <NavLink
                                 onClick={handleLogout}
@@ -119,6 +149,7 @@ const NavBar = () => {
 
     return (
         <div className='px-4 z-50 py-5 w-full mx-auto sm:max-w-full md:max-w-full lg:w-full md:px-24 lg:px-10'>
+
             <div className='relative flex items-center justify-between'>
                 <NavLink
                     aria-label='Scissors n razors'
