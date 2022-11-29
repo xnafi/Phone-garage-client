@@ -6,7 +6,12 @@ import { MdVerified } from "react-icons/md";
 
 
 const AdvertiseCard = ({ ad }) => {
-   
+    console.log('====================================');
+    console.log(ad);
+    console.log('====================================');
+    if (ad.isSold === 'sold') {
+        return
+    }
 
     return (
         <>

@@ -14,13 +14,13 @@ const Sellers = () => {
     const { data: sellers = [], isLoading, refetch } = useQuery({
         queryKey: ['sellers', 'id','email'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/sellers`)
+            const res = await fetch(`https://phone-garage-server-xi.vercel.app/users/sellers`)
             const data = await res.json()
             return data
         }
     })
     const handleDelete = (user) => {
-        fetch(`http://localhost:5000/users/sellers/${user?._id}`, {
+        fetch(`https://phone-garage-server-xi.vercel.app/users/sellers/${user?._id}`, {
             method: 'delete',
             headers: { 'content-type': 'application/json' }
         })
@@ -35,7 +35,7 @@ const Sellers = () => {
     }
 
     const handleVerify = (id) => {
-        fetch(`http://localhost:5000/users/sellers/${id}`, {
+        fetch(`https://phone-garage-server-xi.vercel.app/users/sellers/${id}`, {
             method: 'post',
             headers: { 'content-type': 'application/json' }
         })
@@ -51,7 +51,7 @@ const Sellers = () => {
 
     }
     const handleVerifyAdmin = (email) => {
-        fetch(`http://localhost:5000/users/sellers/${email}`, {
+        fetch(`https://phone-garage-server-xi.vercel.app/users/sellers/${email}`, {
             method: 'put',
             headers: { 'content-type': 'application/json' }
         })
@@ -74,7 +74,7 @@ const Sellers = () => {
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100">
             <h2 className="mb-4 md:text-4xl sm:text-2xl font-semibold leading-tight">All Sellers</h2>
             {
-                sellers.length == 0 ? <h2>No sellers</h2>
+                sellers.length === 0 ? <h2>No sellers</h2>
                     : <div className="overflow-x-auto">
                         <table className="min-w-full text-xs">
                             <thead className="dark:bg-gray-700">

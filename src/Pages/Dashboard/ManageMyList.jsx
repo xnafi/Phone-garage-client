@@ -15,14 +15,14 @@ const ManageMyList = () => {
     const { data: myItems = [], refetch, isLoading } = useQuery({
         queryKey: ['email'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/items?email=${user?.email}`)
+            const res = await fetch(`https://phone-garage-server-xi.vercel.app/items?email=${user?.email}`)
             const data = await res.json()
             return data
         }
     })
 
     const handleDelete = (item) => {
-        fetch(`http://localhost:5000/items/${item._id}`, {
+        fetch(`https://phone-garage-server-xi.vercel.app/items/${item._id}`, {
             method: 'delete',
             headers: { 'content-type': 'application/json' }
         })
@@ -35,7 +35,7 @@ const ManageMyList = () => {
     }
 
     const handleAdvertisc = (id) => {
-        fetch(`http://localhost:5000/items/${id}`, {
+        fetch(`https://phone-garage-server-xi.vercel.app/items/${id}`, {
             method: 'post',
             headers: { 'content-type': 'application/json' },
         })
@@ -83,7 +83,7 @@ const ManageMyList = () => {
                                                 </td>
                                                 <td className="p-3">
                                                     {
-                                                        item.isSold === false ? <p>Not sold</p> : <p>Sold</p>
+                                                        item.isSold === 'noSold' ? <p>Not sold</p> : <p>Sold</p>
                                                     }
                                                 </td>
                                                 <td className="p-3 text-left">

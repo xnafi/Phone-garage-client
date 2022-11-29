@@ -7,7 +7,7 @@ const CatagoryPage = () => {
     const { data: brands = [], isLoading } = useQuery({
         queryKey: ['brands'],
         queryFn: async () => {
-            const req = await fetch('http://localhost:5000/brands')
+            const req = await fetch('https://phone-garage-server-xi.vercel.app/brands')
             const data = await req.json()
             return data
         }

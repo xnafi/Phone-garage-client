@@ -22,7 +22,7 @@ const BookingModal = ({ modalItem }) => {
             productPrice: modalItem?.price,
             bookingUserNumber: event.target.number
         }
-        fetch(`http://localhost:5000/booking`, {
+        fetch(`https://phone-garage-server-xi.vercel.app/booking`, {
             method: 'post',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newBooking)

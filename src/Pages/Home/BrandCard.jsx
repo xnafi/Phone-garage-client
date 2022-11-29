@@ -11,7 +11,7 @@ const BrandCard = ({ item }) => {
     const { user } = useContext(AuthContext)
     const [modalItem, setModalItem] = useState({})
     const handleAddWishList = (id) => {
-        fetch(`http://localhost:5000/items/${id}`, {
+        fetch(`https://phone-garage-server-xi.vercel.app/items/${id}`, {
             method: 'put',
         })
             .then(res => res.json())
@@ -25,11 +25,13 @@ const BrandCard = ({ item }) => {
 
             })
     }
-  
+
     const handleModal = (item) => {
         setModalItem(item)
     }
-    console.log(modalItem)
+    if (item?.isSold === 'sold') {
+        return
+    }
     return (
         <div className="rounded-md shadow-md dark:bg-gray-900 bg-black dark:text-gray-100">
             <div className="flex items-center justify-between p-3">
@@ -85,7 +87,7 @@ const BrandCard = ({ item }) => {
             </div>
             <BookingModal modalItem={modalItem} />
         </div >
-   
+
     )
 }
 

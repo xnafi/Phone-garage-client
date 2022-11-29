@@ -42,7 +42,7 @@ const SignUp = () => {
                         isAdmin: false,
                         verify: false
                     }
-                    axios.post('http://localhost:5000/users', newUser)
+                    axios.post('https://phone-garage-server-xi.vercel.app/users', newUser)
                         .then(res => {
                             if (res.data.acknowledged) {
                                 createUserWithEmail(data.email, data.password)
@@ -80,7 +80,7 @@ const SignUp = () => {
                     role: 'buyer',
                     isAdmin: false
                 }
-                axios.post('http://localhost:5000/users', newUser)
+                axios.post('https://phone-garage-server-xi.vercel.app/users', newUser)
                     .then(res => {
                         if (res.data.acknowledged) {
                             Swal.fire('User created successfully')

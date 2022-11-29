@@ -10,13 +10,13 @@ const MyBooking = () => {
     const { data: myItems = [], isLoading, refetch } = useQuery({
         queryKey: ['email'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`)
+            const res = await fetch(`https://phone-garage-server-xi.vercel.app/booking?email=${user?.email}`)
             const data = await res.json()
             return data
         }
     })
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/booking/${id}`, {
+        fetch(`https://phone-garage-server-xi.vercel.app/booking/${id}`, {
             method: 'delete'
         })
             .then(res => res.json())
@@ -68,7 +68,10 @@ const MyBooking = () => {
                                                         <p>{item?.productPrice}</p>
                                                     </td>
                                                     <td className="p-3 text-left">
-                                                        <Link to={`/payment/${item?._id}`} className="btn btn-sm btn-error cursor-pointer">PAY</Link>
+                                                        {
+
+                                                            item.isSold === 'sold' ? <button className="btn btn-sm cursor-pointer" disabled>paid</button> : <Link to={`/payment/${item?._id}`} className="btn btn-sm btn-error cursor-pointer">PAY</Link>
+                                                        }
                                                     </td>
                                                     <td className="p-3 text-left">
                                                         <label onClick={() => handleDelete(item?._id)} className="btn btn-sm btn-error cursor-pointer">Delete</label>

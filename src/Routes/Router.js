@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/brand/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/brand/${params.id}`),
+                loader: ({ params }) => fetch(`https://phone-garage-server-xi.vercel.app/brand/${params.id}`),
                 element: <Brand />
             },
             {
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/payment/:id',
-                loader: ({params}) =>fetch(`http://localhost:5000/booking/${params.id}`),
+                loader: ({params}) =>fetch(`https://phone-garage-server-xi.vercel.app/booking/${params.id}`),
                 element: <Payment />
             },
 

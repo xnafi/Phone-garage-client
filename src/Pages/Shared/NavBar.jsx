@@ -19,7 +19,7 @@ const NavBar = () => {
     }
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/users/${user?.email}`)
+            fetch(`https://phone-garage-server-xi.vercel.app/users/${user?.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setCurrentUser(data)
@@ -87,7 +87,7 @@ const NavBar = () => {
 
             }
             {
-                currentUser?.role === 'seller' &&
+                user && currentUser?.role === 'seller' &&
                 <li>
                     <NavLink
                         to='/dashboard'

@@ -9,17 +9,18 @@ const Brand = ({ }) => {
     const { data: data = [], isLoading, refetch } = useQuery({
         queryKey: ['name'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/items?name=${name}`)
+            const res = await fetch(`https://phone-garage-server-xi.vercel.app/items?name=${name}`)
             const data = await res.json()
             return data
         }
     })
-    console.log(name);
-    console.log(data);
+
     return (
         <>
+
             <div className='my-10 px-4 lg:px-10 items-center'>
                 <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10 uppercase'>{name}</h2>
+                
                 {
                     data?.length === 0 ? <h2 className='text-center text-3xl'>No data found</h2> :
                         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center justify-center md:gap-6'>

@@ -65,7 +65,7 @@ const AddPhone = () => {
                         advertise: false,
                         postDate: currentDate
                     }
-                    fetch(`http://localhost:5000/items`, {
+                    fetch(`https://phone-garage-server-xi.vercel.app/items`, {
                         method: 'post',
                         headers: {
                             'content-type': 'application/json'
@@ -85,7 +85,7 @@ const AddPhone = () => {
     const { data: currentUser = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const req = await fetch(`http://localhost:5000/users/${user.email}`)
+            const req = await fetch(`https://phone-garage-server-xi.vercel.app/users/${user.email}`)
             const data = await req.json()
             return data
         }

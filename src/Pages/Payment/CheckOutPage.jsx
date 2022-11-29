@@ -18,7 +18,7 @@ const CheckOutPage = ({ paymentDetails }) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://phone-garage-server-xi.vercel.app/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ productPrice }),
@@ -82,7 +82,7 @@ const CheckOutPage = ({ paymentDetails }) => {
                 productId: productId
 
             }
-            fetch(`http://localhost:5000/booking/${_id}`, {
+            fetch(`https://phone-garage-server-xi.vercel.app/booking/${_id}`, {
                 method: 'post',
                 headers: {
                     'content-type': 'application/json',
