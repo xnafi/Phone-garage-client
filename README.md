@@ -1,4 +1,4 @@
-## Project Name : Moders Laptop
+## Project Name : phone garage 
 
 ### Live Site Link
 
