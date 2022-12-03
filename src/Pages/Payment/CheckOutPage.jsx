@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2'
 
 const CheckOutPage = ({ paymentDetails }) => {
 

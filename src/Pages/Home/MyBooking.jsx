@@ -17,7 +17,8 @@ const MyBooking = () => {
     })
     const handleDelete = (id) => {
         fetch(`https://phone-garage-server-xi.vercel.app/booking/${id}`, {
-            method: 'delete'
+            method: 'delete',
+            headers: { 'content-type': 'application/json' },
         })
             .then(res => res.json())
             .then(data => {
@@ -52,12 +53,12 @@ const MyBooking = () => {
                                             <>
                                                 <tr key={item._id} className="border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-900">
                                                     <td className="p-3">
-                                                        <p>{item.productName}</p>
+                                                        <p>{item?.productName}</p>
                                                     </td>
                                                     <td className='p-3'>
                                                         <div className="avatar">
                                                             <div className="w-24 rounded">
-                                                                <img src={item?.productImage} alt />
+                                                                <img src={item?.productImage} alt='' />
                                                             </div>
                                                         </div>
                                                     </td>

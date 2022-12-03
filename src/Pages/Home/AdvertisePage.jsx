@@ -14,8 +14,11 @@ const AdvertisePage = () => {
             return data
         }
     })
-   
 
+    if (adevertise.adevertise === false) {
+        return <></>
+    }
+   
     return (
         <>
             <div className='my-20 px-4 lg:px-10 items-center'>

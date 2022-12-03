@@ -40,11 +40,11 @@ export const Dashboard = () => {
             <div className="drawer drawer-mobile">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
 
-                <div className="drawer-content px-4 lg:px-10 no-scrollbar z-30 h-full ">
+                <div className="drawer-content px-4 lg:px-10 h-full">
 
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side z-30">
+                <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
                     <ul className="menu p-4 w-80 bg-base-100">
                         {

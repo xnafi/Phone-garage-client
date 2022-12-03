@@ -5,14 +5,11 @@ import { AuthContext } from '../../Context/AuthProvider';
 import Loading from './Loading';
 
 const BookingModal = ({ modalItem }) => {
-
     const { user, loading } = useContext(AuthContext)
     const navigate = useNavigate()
 
-
     const handleBooking = event => {
         event.preventDefault()
-
         const newBooking = {
             bookingUserEmail: user?.email,
             productName: modalItem?.name,
@@ -40,7 +37,6 @@ const BookingModal = ({ modalItem }) => {
     if (loading) {
         return <Loading />
     }
-    console.log(modalItem);
     return (
         <>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -60,7 +56,6 @@ const BookingModal = ({ modalItem }) => {
                         <br />
                         {
                             user ? <input className='btn btn-accent w-full' type="submit" value="Submit" /> : <Link to="/login" className='btn btn-accent w-full'>Please Login First</Link>
-
                         }
                     </form>
                 </div>

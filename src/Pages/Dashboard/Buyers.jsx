@@ -20,7 +20,8 @@ const Buyers = () => {
 
     const handleDelete = (user) => {
         fetch(`https://phone-garage-server-xi.vercel.app/users/buyers/${user._id}`, {
-            method: 'delete'
+            method: 'delete',
+            headers: { 'content-type': 'application/json' },
         })
             .then(res => res.json())
             .then(data => {
@@ -29,7 +30,7 @@ const Buyers = () => {
             })
 
     }
-
+    console.log(buyers);
     if (isLoading) {
         return <Loading />
     }
@@ -37,7 +38,7 @@ const Buyers = () => {
         <div className="p-2 mx-auto sm:p-4 dark:text-gray-100 overflow-x-clip">
             <h2 className="mb-4 md:text-4xl sm:text-2xl font-semibold leading-tight">All Buyers</h2>
             {
-                buyers.length == 0 ? <h2>No buyers found</h2>
+                buyers.length === 0 ? <h2>No buyers found</h2>
                     : <div className="overflow-x-auto">
                         <table className="min-w-full text-xs">
                             <thead className="dark:bg-gray-700">

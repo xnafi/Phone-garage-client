@@ -5,14 +5,17 @@ import { AuthContext } from '../Context/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Loading from '../Pages/Shared/Loading';
+import useToken from '../hooks/useToken';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
-    const { createUserWithEmail, user, updateUser, signInWithGoogle} = useContext(AuthContext)
+    const { createUserWithEmail, user, updateUser, signInWithGoogle } = useContext(AuthContext)
     const { register, handleSubmit, reset } = useForm();
     const location = useLocation()
     const navigate = useNavigate()
     const from = location?.state?.from.pathname || '/'
+    const [currentUser, setCurrentUser] = useState('')
+    const [token] = useToken(currentUser)
     const option = [
         {
             name: "buyer"
@@ -52,6 +55,7 @@ const SignUp = () => {
                                             .then(() => { })
                                             .catch(er => Swal.fire(er.message))
                                         Swal.fire('User created successfully')
+                                        setCurrentUser(data.email)
                                         reset()
                                         navigate(from, { replace: true })
                                     })

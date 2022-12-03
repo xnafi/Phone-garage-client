@@ -1,21 +1,31 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Context/AuthProvider'
+import useToken from '../hooks/useToken';
 
 const Login = () => {
+
 
     const { loginWithEmail, signInWithGoogle } = useContext(AuthContext)
     const { register, handleSubmit, reset } = useForm();
     const location = useLocation()
     const navigate = useNavigate()
     const from = location?.state?.from.pathname || '/'
+    const [currentUser, setCurrentUser] = useState(null)
+    const [token] = useToken(currentUser)
+
+    // if (token) {
+    //     return navigate(from, { replace: true })
+    // }
     const onSubmit = (data) => {
         loginWithEmail(data.email, data.password)
             .then(res => {
                 Swal.fire('Login successfull')
-                navigate(from, { replace: true })
+                const email = data.email
+                setCurrentUser(email)
+
             })
             .catch(er => Swal.fire(er.message))
     }
@@ -28,6 +38,7 @@ const Login = () => {
             })
             .catch(er => Swal.fire(er.message))
     }
+    console.log("🚀 ~ file: Login.jsx:11 ~ Login ~ currentUser", currentUser)
     return (
         <div className='md:my-20 my-10 px-4 lg:px-10 items-center justify-center flex'>
             <div className="w-full max-w-md md:p-8 p-2 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 bg-neutral">

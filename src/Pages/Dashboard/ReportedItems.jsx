@@ -20,7 +20,8 @@ const ReportedItems = () => {
     console.log(reportItem);
     const handleDelete = (user) => {
         fetch(`https://phone-garage-server-xi.vercel.app/items/${user._id}`, {
-            method: 'delete'
+            method: 'delete',
+            headers: { 'content-type': 'application/json' },
         })
             .then(res => res.json())
             .then(data => {

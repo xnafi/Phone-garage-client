@@ -1,6 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import logo from '../../assets/logo.jpg';
 import { AuthContext } from '../../Context/AuthProvider';
@@ -72,33 +71,26 @@ const NavBar = () => {
                     Blog
                 </NavLink>
             </li>
+ 
             {
-                currentUser?.isAdmin === true &&
-                <li>
-                    <NavLink
-                        to='/dashboard'
-                        aria-label='dashboard'
-                        title='dashboard'
-                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                    >
-                        Dashboard
-                    </NavLink>
-                </li>
+                currentUser?.isAdmin === true || currentUser?.role === 'seller' ?
 
-            }
-            {
-                user && currentUser?.role === 'seller' &&
-                <li>
-                    <NavLink
-                        to='/dashboard'
-                        aria-label='dashboard'
-                        title='dashboard'
-                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                    >
-                        Dashboard
-                    </NavLink>
-                </li>
+                    <>
+                        <li>
+                            <NavLink
+                                to='/dashboard'
+                                aria-label='dashboard'
+                                title='dashboard'
+                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                            >
+                                Dashboard
+                            </NavLink>
+                        </li>
+                    </>
 
+                    :
+
+                    <></>
             }
 
             {
@@ -115,7 +107,7 @@ const NavBar = () => {
                         <li>
                             <NavLink className="avatar" title={user?.displayName}>
                                 <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src={user?.photoURL} />
+                                    <img src={user?.photoURL} alt='' />
                                 </div>
                             </NavLink>
                         </li>
