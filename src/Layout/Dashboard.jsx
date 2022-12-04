@@ -6,25 +6,20 @@ import NavBar from '../Pages/Shared/NavBar'
 
 
 export const Dashboard = () => {
-
-
-    const [currentUser, setCurrentUser] = useState(null)
     const { user } = useContext(AuthContext)
+    const [currentUser, setCurrentUser] = useState({})
 
     useEffect(() => {
-        if (user?.email) {
-            fetch(`https://phone-garage-server-xi.vercel.app/users/${user?.email}`)
-                .then(res => res.json())
-                .then(data => {
-                    setCurrentUser(data)
-                })
+        fetch(`http://localhost:5000/users?email=${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setCurrentUser(data)
+            })
 
-        }
-    }, [user])
+    }, [])
     const activeCss = `hover:border-b-2 border-text-info transition-all font-medium !text-accent tracking-wide duration-200 hover:!text-info`
     const inActiveCss = `hover:border-b-2 border-text-info transition-all !text-white font-medium tracking-wide duration-200 hover:!text-info`
-
-
+    console.log('sjdasod', currentUser[0]);
     return (
 
         <>
@@ -48,7 +43,7 @@ export const Dashboard = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
                     <ul className="menu p-4 w-80 bg-base-100">
                         {
-                            !currentUser?.role === 'seller' ? <Navigate to='/login' /> : <>
+                            currentUser[0]?.isAdmin=== true && <>
                                 <li>
                                     <NavLink
                                         to='/dashboard/sellers'
@@ -69,39 +64,46 @@ export const Dashboard = () => {
                                         All Buyers
                                     </NavLink>
                                 </li>
+
+                                <li>
+                                    <NavLink
+                                        to='/dashboard/reportitem'
+                                        aria-label='Reported items'
+                                        title='Reported items'
+                                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                                    >
+                                        Reported items
+                                    </NavLink>
+                                </li>
                             </>
                         }
+                        {
+                            currentUser[0]?.role === 'seller' ? <>
+                                <li>
+                                    <NavLink
+                                        to='/dashboard/addphone'
+                                        aria-label='Add Phone'
+                                        title='Add Phone'
+                                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                                    >
+                                        Add Phone
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to='/dashboard/managemylist'
+                                        aria-label='Manage My list'
+                                        title='Manage My list'
+                                        className={({ isActive }) => isActive ? activeCss : inActiveCss}
+                                    >
+                                        Manage My List
+                                    </NavLink>
+                                </li>
+                            </> :
+                                <></>
+                        }
 
-                        <li>
-                            <NavLink
-                                to='/dashboard/addphone'
-                                aria-label='Add Phone'
-                                title='Add Phone'
-                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                            >
-                                Add Phone
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to='/dashboard/managemylist'
-                                aria-label='Manage My list'
-                                title='Manage My list'
-                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                            >
-                                Manage My List
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to='/dashboard/reportitem'
-                                aria-label='Reported items'
-                                title='Reported items'
-                                className={({ isActive }) => isActive ? activeCss : inActiveCss}
-                            >
-                                Reported items
-                            </NavLink>
-                        </li>
+
                     </ul>
 
                 </div>

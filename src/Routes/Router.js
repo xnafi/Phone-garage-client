@@ -5,6 +5,7 @@ import Login from "../LoginAndRegister/Login";
 import SignUp from "../LoginAndRegister/SignUp";
 import AddPhone from "../Pages/Dashboard/AddPhone";
 import Buyers from "../Pages/Dashboard/Buyers";
+import DashBoardHome from "../Pages/Dashboard/DashBoardHome";
 import ManageMyList from "../Pages/Dashboard/ManageMyList";
 import ReportedItems from "../Pages/Dashboard/ReportedItems";
 import Sellers from "../Pages/Dashboard/Sellers";
@@ -49,7 +50,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/payment/:id',
-                loader: ({params}) =>fetch(`https://phone-garage-server-xi.vercel.app/booking/${params.id}`),
+                loader: ({ params }) => fetch(`https://phone-garage-server-xi.vercel.app/booking/${params.id}`),
                 element: <Payment />
             },
 
@@ -62,7 +63,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element:<Sellers />
+                element: <DashBoardHome />
             },
             {
                 path: '/dashboard/sellers',
@@ -70,7 +71,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/buyers',
-                element:<Buyers />
+                element: <Buyers />
             },
             {
                 path: '/dashboard/addphone',
