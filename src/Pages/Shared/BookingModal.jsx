@@ -19,14 +19,11 @@ const BookingModal = ({ modalItem }) => {
       productPrice: modalItem?.price,
       bookingUserNumber: event.target.number,
     };
-    fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/booking`,
-      {
-        method: "post",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(newBooking),
-      }
-    )
+    fetch(`https://phone-garage-server-xi.vercel.app/booking`, {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newBooking),
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

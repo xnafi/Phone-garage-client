@@ -18,7 +18,7 @@ const Sellers = () => {
     queryKey: ["sellers", "id", "email"],
     queryFn: async () => {
       const res = await fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users/sellers`
+        `https://phone-garage-server-xi.vercel.app/users/sellers`
       );
       const data = await res.json();
       return data;
@@ -26,7 +26,7 @@ const Sellers = () => {
   });
   const handleDelete = (user) => {
     fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users/sellers/${user?._id}`,
+      `https://phone-garage-server-xi.vercel.app/users/sellers/${user?._id}`,
       {
         method: "delete",
         headers: { "content-type": "application/json" },
@@ -41,13 +41,10 @@ const Sellers = () => {
   };
 
   const handleVerify = (id) => {
-    fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users/sellers/${id}`,
-      {
-        method: "post",
-        headers: { "content-type": "application/json" },
-      }
-    )
+    fetch(`https://phone-garage-server-xi.vercel.app/users/sellers/${id}`, {
+      method: "post",
+      headers: { "content-type": "application/json" },
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -59,13 +56,10 @@ const Sellers = () => {
       .catch((er) => console.log(er));
   };
   const handleVerifyAdmin = (email) => {
-    fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users/sellers/${email}`,
-      {
-        method: "put",
-        headers: { "content-type": "application/json" },
-      }
-    )
+    fetch(`https://phone-garage-server-xi.vercel.app/users/sellers/${email}`, {
+      method: "put",
+      headers: { "content-type": "application/json" },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

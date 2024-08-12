@@ -14,7 +14,7 @@ const Brand = () => {
     queryKey: ["name"],
     queryFn: async () => {
       const res = await fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/items?name=${name}`
+        `https://phone-garage-server-xi.vercel.app/items?name=${name}`
       );
       const data = await res.json();
       return data;

@@ -17,7 +17,7 @@ const Buyers = () => {
     queryKey: ["buyers", "buyers/:id"],
     queryFn: async () => {
       const res = await fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users/buyers`
+        `https://phone-garage-server-xi.vercel.app/users/buyers`
       );
       const data = await res.json();
       return data;
@@ -26,7 +26,7 @@ const Buyers = () => {
 
   const handleDelete = (user) => {
     fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users/buyers/${user._id}`,
+      `https://phone-garage-server-xi.vercel.app/users/buyers/${user._id}`,
       {
         method: "delete",
         headers: { "content-type": "application/json" },
@@ -75,7 +75,7 @@ const Buyers = () => {
                       <td className="p-3">
                         <div className="avatar">
                           <div className="w-12 rounded-full">
-                            <img src={user?.image}  alt="F"/>
+                            <img src={user?.image} alt="F" />
                           </div>
                         </div>
                       </td>

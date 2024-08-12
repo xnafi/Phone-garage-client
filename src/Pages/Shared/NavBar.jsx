@@ -16,9 +16,7 @@ const NavBar = () => {
   };
   useEffect(() => {
     if (user?.email) {
-      fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users/${user?.email}`
-      )
+      fetch(`https://phone-garage-server-xi.vercel.app/users/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
           setCurrentUser(data);

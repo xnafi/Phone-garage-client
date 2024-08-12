@@ -4,13 +4,10 @@ import Swal from "sweetalert2";
 
 const BrandCard = ({ item, setModalItem }) => {
   const handleAddWishList = (id) => {
-    fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/items/${id}`,
-      {
-        method: "put",
-        headers: { "content-type": "application/json" },
-      }
-    )
+    fetch(`https://phone-garage-server-xi.vercel.app/items/${id}`, {
+      method: "put",
+      headers: { "content-type": "application/json" },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {

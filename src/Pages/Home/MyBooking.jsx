@@ -15,20 +15,17 @@ const MyBooking = () => {
     queryKey: ["email"],
     queryFn: async () => {
       const res = await fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/booking?email=${user?.email}`
+        `https://phone-garage-server-xi.vercel.app/booking?email=${user?.email}`
       );
       const data = await res.json();
       return data;
     },
   });
   const handleDelete = (id) => {
-    fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/booking/${id}`,
-      {
-        method: "delete",
-        headers: { "content-type": "application/json" },
-      }
-    )
+    fetch(`https://phone-garage-server-xi.vercel.app/booking/${id}`, {
+      method: "delete",
+      headers: { "content-type": "application/json" },
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

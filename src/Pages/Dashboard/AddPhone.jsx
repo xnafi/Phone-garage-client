@@ -66,16 +66,13 @@ const AddPhone = () => {
             advertise: false,
             postDate: currentDate,
           };
-          fetch(
-            `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/items`,
-            {
-              method: "post",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(newItem),
-            }
-          )
+          fetch(`https://phone-garage-server-xi.vercel.app/items`, {
+            method: "post",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(newItem),
+          })
             .then((res) => res.json())
             .then((res) => {
               if (res.acknowledged) {
@@ -91,7 +88,7 @@ const AddPhone = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const req = await fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users/${user?.email}`
+        `https://phone-garage-server-xi.vercel.app/users/${user?.email}`
       );
       const data = await req.json();
       return data;

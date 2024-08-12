@@ -15,14 +15,11 @@ const CheckOutPage = ({ paymentDetails }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch(
-      "https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/create-payment-intent",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productPrice }),
-      }
-    )
+    fetch("https://phone-garage-server-xi.vercel.app/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productPrice }),
+    })
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret);
@@ -75,18 +72,15 @@ const CheckOutPage = ({ paymentDetails }) => {
         id: _id,
         productId: productId,
       };
-      fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/booking/${_id}`,
-        {
-          method: "post",
-          headers: {
-            "content-type": "application/json",
-            // authorization: `bearer ${localStorage.getItem('token')}`
-            body: JSON.stringify(updateDoc),
-          },
+      fetch(`https://phone-garage-server-xi.vercel.app/booking/${_id}`, {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+          // authorization: `bearer ${localStorage.getItem('token')}`
           body: JSON.stringify(updateDoc),
-        }
-      )
+        },
+        body: JSON.stringify(updateDoc),
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {

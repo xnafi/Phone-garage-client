@@ -13,7 +13,7 @@ const ReportedItems = () => {
     queryKey: ["item"],
     queryFn: async () => {
       const res = await fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/items`
+        `https://phone-garage-server-xi.vercel.app/items`
       );
       const data = await res.json();
       return data;
@@ -21,13 +21,10 @@ const ReportedItems = () => {
   });
   console.log(reportItem);
   const handleDelete = (user) => {
-    fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/items/${user._id}`,
-      {
-        method: "delete",
-        headers: { "content-type": "application/json" },
-      }
-    )
+    fetch(`https://phone-garage-server-xi.vercel.app/items/${user._id}`, {
+      method: "delete",
+      headers: { "content-type": "application/json" },
+    })
       .then((res) => res.json())
       .then((data) => {
         refetch();

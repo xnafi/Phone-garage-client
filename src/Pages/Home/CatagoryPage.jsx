@@ -8,7 +8,7 @@ const CatagoryPage = () => {
     queryKey: ["brands"],
     queryFn: async () => {
       const req = await fetch(
-        "https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/brands"
+        "https://phone-garage-server-xi.vercel.app/brands"
       );
       const data = await req.json();
       return data;

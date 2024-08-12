@@ -47,10 +47,7 @@ const SignUp = () => {
             verify: false,
           };
           axios
-            .post(
-              "https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users",
-              newUser
-            )
+            .post("https://phone-garage-server-xi.vercel.app/users", newUser)
             .then((res) => {
               if (res.data.acknowledged) {
                 createUserWithEmail(data.email, data.password)
@@ -90,10 +87,7 @@ const SignUp = () => {
           isAdmin: false,
         };
         axios
-          .post(
-            "https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users",
-            newUser
-          )
+          .post("https://phone-garage-server-xi.vercel.app/users", newUser)
           .then((res) => {
             if (res.data.acknowledged) {
               Swal.fire("User created successfully");

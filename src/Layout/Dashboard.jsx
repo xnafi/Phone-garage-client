@@ -10,7 +10,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     fetch(
-      `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/users?email=${user?.email}`
+      `https://phone-garage-server-xi.vercel.app/users?email=${user?.email}`
     )
       .then((res) => res.json())
       .then((data) => {

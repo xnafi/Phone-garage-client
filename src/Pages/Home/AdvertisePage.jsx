@@ -7,7 +7,7 @@ const AdvertisePage = () => {
     queryKey: ["advertise"],
     queryFn: async () => {
       const res = await fetch(
-        `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/advertise/item`
+        `https://phone-garage-server-xi.vercel.app/advertise/item`
       );
       const data = await res.json();
       return data;

@@ -30,9 +30,7 @@ export const router = createBrowserRouter([
       {
         path: "/brand/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/brand/${params.id}`
-          ),
+          fetch(`https://phone-garage-server-xi.vercel.app/brand/${params.id}`),
         element: <Brand />,
       },
       {
@@ -55,7 +53,7 @@ export const router = createBrowserRouter([
         path: "/payment/:id",
         loader: ({ params }) =>
           fetch(
-            `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/booking/${params.id}`
+            `https://phone-garage-server-xi.vercel.app/booking/${params.id}`
           ),
         element: <Payment />,
       },
