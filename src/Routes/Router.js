@@ -18,73 +18,82 @@ import ErrorPage from "../Pages/Shared/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Main />,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                index: true,
-                element: <HomePage />
-            },
-            {
-                path: '/brand/:id',
-                loader: ({ params }) => fetch(`https://phone-garage-server-xi.vercel.app/brand/${params.id}`),
-                element: <Brand />
-            },
-            {
-                path: '/login',
-                element: <Login />
-            },
-            {
-                path: '/signup',
-                element: <SignUp />
-            },
-            {
-                path: '/mybooking',
-                element: <MyBooking />
-            },
-            {
-                path: '/blog',
-                element: <Blog />
-            },
-            {
-                path: '/payment/:id',
-                loader: ({ params }) => fetch(`https://phone-garage-server-xi.vercel.app/booking/${params.id}`),
-                element: <Payment />
-            },
-
-        ],
-    },
-    {
-        path: '/dashboard',
-        element: <PrivateRoute><Dashboard /></PrivateRoute>,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                index: true,
-                element: <DashBoardHome />
-            },
-            {
-                path: '/dashboard/sellers',
-                element: <Sellers />
-            },
-            {
-                path: '/dashboard/buyers',
-                element: <Buyers />
-            },
-            {
-                path: '/dashboard/addphone',
-                element: <AddPhone />
-            },
-            {
-                path: '/dashboard/managemylist',
-                element: <ManageMyList />
-            },
-            {
-                path: '/dashboard/reportitem',
-                element: <ReportedItems />
-            },
-        ]
-    },
-])
+  {
+    path: "/",
+    element: <Main />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "/brand/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/brand/${params.id}`
+          ),
+        element: <Brand />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/mybooking",
+        element: <MyBooking />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/payment/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://phone-garage-server-4aoy7fjf0-forhad-khans-projects-96a1cae2.vercel.app/booking/${params.id}`
+          ),
+        element: <Payment />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <DashBoardHome />,
+      },
+      {
+        path: "/dashboard/sellers",
+        element: <Sellers />,
+      },
+      {
+        path: "/dashboard/buyers",
+        element: <Buyers />,
+      },
+      {
+        path: "/dashboard/addphone",
+        element: <AddPhone />,
+      },
+      {
+        path: "/dashboard/managemylist",
+        element: <ManageMyList />,
+      },
+      {
+        path: "/dashboard/reportitem",
+        element: <ReportedItems />,
+      },
+    ],
+  },
+]);
