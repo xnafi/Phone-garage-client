@@ -16,19 +16,19 @@ export const Dashboard = () => {
       .then((data) => {
         setCurrentUser(data);
       });
-  }, []);
+  }, [user?.email]);
   const activeCss = `hover:border-b-2 border-text-info transition-all font-medium !text-accent tracking-wide duration-200 hover:!text-info`;
   const inActiveCss = `hover:border-b-2 border-text-info transition-all !text-white font-medium tracking-wide duration-200 hover:!text-info`;
-  console.log("sjdasod", currentUser[0]);
+
   return (
-    <>
+    <div className="max-w-7xl mx-auto">
       <NavBar />
       <div className="mb-10 lg:hidden">
         {user && (
           <label
             htmlFor="dashboard-drawer"
             tabIndex={2}
-            className="btn btn-ghost lg:hidden absolute z-50 animate-pulse"
+            className="btn btn-ghost lg:hidden absolute z-50"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,9 +57,9 @@ export const Dashboard = () => {
         <div className="drawer-content px-4 lg:px-10 h-full">
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side">
-          <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
-          <ul className="menu p-4 w-80 bg-base-100">
+        <div className="drawer-side w-60 lg:w-full md:px-4">
+          <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+          <ul className="menu p-4 bg-base-100">
             {currentUser[0]?.isAdmin === true && (
               <>
                 <li>
@@ -135,6 +135,6 @@ export const Dashboard = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
