@@ -453,30 +453,31 @@ const Navbar = () => {
               Dashboard
             </NavLink>
           ) : null}
-          <NavLink
-            to="/mybooking"
-            onClick={handleClose}
-            className={`block px-3 py-2 rounded-md text-base font-medium ${
-              isActive("/mybooking")
-                ? "bg-gray-900"
-                : "text-gray-300 hover:bg-white/10 hover:text-white"
-            }`}
-          >
-            My Booking
-          </NavLink>
-          <NavLink
-            to="/blog"
-            onClick={handleClose}
-            className={`block px-3 py-2 rounded-md text-base font-medium ${
-              isActive("/blog")
-                ? "bg-gray-900"
-                : "text-gray-300 hover:bg-white/10 hover:text-white"
-            }`}
-          >
-            Blog
-          </NavLink>
+
           {user ? (
             <>
+              <NavLink
+                to="/mybooking"
+                onClick={handleClose}
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  isActive("/mybooking")
+                    ? "bg-gray-900"
+                    : "text-gray-300 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                My Booking
+              </NavLink>
+              <NavLink
+                to="/blog"
+                onClick={handleClose}
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  isActive("/blog")
+                    ? "bg-gray-900"
+                    : "text-gray-300 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                Blog
+              </NavLink>
               <NavLink
                 onClick={handleLogout}
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white"
