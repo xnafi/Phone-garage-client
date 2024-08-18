@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthProvider";
-import useToken from "../hooks/useToken";
+
 
 const Login = () => {
   const { loginWithEmail, signInWithGoogle } = useContext(AuthContext);
@@ -12,7 +12,6 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location?.state?.from.pathname || "/";
   const [currentUser, setCurrentUser] = useState(null);
-  const [token] = useToken(currentUser);
 
   const onSubmit = (data) => {
     loginWithEmail(data.email, data.password)
@@ -20,6 +19,7 @@ const Login = () => {
         Swal.fire("Login successful");
         const email = data.email;
         setCurrentUser(email);
+        navigate(from, { replace: true });
       })
       .catch((er) => Swal.fire(er.message));
   };
