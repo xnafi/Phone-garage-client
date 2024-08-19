@@ -2,7 +2,7 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div className="bg-transparent h-full md:h-screen flex justify-center items-center">
+    <div className="bg-transparent h-full lg:h-screen flex justify-center items-center mt-[100px] lg:mt-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-base font-semibold tracking-wide uppercase">
@@ -18,14 +18,14 @@ const Blog = () => {
         </div>
         <div className="mt-10">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+            <div className="bg-transparent border shadow-md rounded-lg overflow-hidden">
               <img
                 className="h-48 w-full object-cover"
                 src="https://via.placeholder.com/400x300"
                 alt="Second-Hand Mobile"
               />
               <div className="p-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                <h3 className="text-lg leading-6 font-medium text-white">
                   Buy Mobiles
                 </h3>
                 <p className="mt-2 text-base text-gray-500">
@@ -35,14 +35,14 @@ const Blog = () => {
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+            <div className="bg-transparent border shadow-md rounded-lg overflow-hidden">
               <img
                 className="h-48 w-full object-cover"
                 src="https://via.placeholder.com/400x300"
                 alt="Sell Mobile"
               />
               <div className="p-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                <h3 className="text-lg leading-6 font-medium text-white">
                   Sell Your Mobile
                 </h3>
                 <p className="mt-2 text-base text-gray-500">
@@ -52,14 +52,14 @@ const Blog = () => {
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+            <div className="bg-transparent border shadow-md rounded-lg overflow-hidden">
               <img
                 className="h-48 w-full object-cover"
                 src="https://via.placeholder.com/400x300"
                 alt="Secure Transactions"
               />
               <div className="p-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                <h3 className="text-lg leading-6 font-medium text-white">
                   Secure Transactions
                 </h3>
                 <p className="mt-2 text-base text-gray-500">

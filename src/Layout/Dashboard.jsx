@@ -17,13 +17,13 @@ export const Dashboard = () => {
         setCurrentUser(data);
       });
   }, [user?.email]);
-  const activeCss = `hover:border-b-2 border-text-info transition-all font-medium !text-accent tracking-wide duration-200 hover:!text-info`;
-  const inActiveCss = `hover:border-b-2 border-text-info transition-all !text-white font-medium tracking-wide duration-200 hover:!text-info`;
+  const activeCss = ` border-text-info space-y-2 transition-all font-medium !text-accent tracking-wide duration-200 hover:!text-info`;
+  const inActiveCss = ` border-text-info space-y-2 transition-all !text-white font-medium tracking-wide duration-200 hover:!text-info`;
 
   return (
     <div className="max-w-7xl mx-auto">
       <NavBar />
-      <div className="mb-10 lg:hidden">
+      <div className="lg:hidden px-2 md:px-4 lg:px-0">
         {user && (
           <label
             htmlFor="dashboard-drawer"
@@ -47,14 +47,14 @@ export const Dashboard = () => {
           </label>
         )}
       </div>
-      <div className="drawer drawer-mobile">
+      <div className="drawer drawer-mobile mt-[100px]">
         <input
           id="dashboard-drawer"
           type="checkbox"
           className="drawer-toggle"
         />
 
-        <div className="drawer-content px-4 lg:px-10 h-full">
+        <div className="drawer-content px-4 lg:px-10 mt-10 lg:mt-0">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side w-60 lg:w-full md:px-4">

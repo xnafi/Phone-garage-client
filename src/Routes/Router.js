@@ -16,6 +16,7 @@ import MyBooking from "../Pages/Home/MyBooking";
 import Payment from "../Pages/Payment/Payment";
 import ErrorPage from "../Pages/Shared/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import About from "../Pages/Shared/About";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/payment/:id",
