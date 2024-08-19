@@ -3,7 +3,7 @@ import homeBanner from "../../assets/banner.png";
 import { TiTick } from "react-icons/ti";
 const HomeBanner = () => {
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-screen px-1">
       {/* Background Image */}
       <div
         className="absolute inset-0 top-[20%] bg:bg-cover bg-no-repeat bg-center md:bg-cover bg-transparent"
