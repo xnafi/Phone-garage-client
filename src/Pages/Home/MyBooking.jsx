@@ -37,7 +37,7 @@ const MyBooking = () => {
     return <Loading />;
   }
   return (
-    <div className="my-10 px-4 lg:px-10 items-center mt-[100px] ">
+    <div className="my-10 px-4 lg:px-10 items-center mt-[100px] h-full md:h-screen">
       <div className="p-2 mx-auto sm:p-4 dark:text-gray-100 overflow-x-clip">
         <h2 className="mb-4 md:text-4xl sm:text-2xl font-semibold leading-tight">
           Manage items
