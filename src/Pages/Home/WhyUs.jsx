@@ -44,23 +44,26 @@ const WhyUs = () => {
 
     ]
     return (
-        <div className='my-20 px-4 lg:px-10'>
-            <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10 uppercase'>Why Us</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                {
-                    whyUs.map(item =>
-                        <div key={item.id} className="card card-side text-info shadow-xl bg-[#ECF9F8] hover:scale-105 transition-all">
-                            <figure>{item.icon}</figure>
-                            <div className="card-body">
-                                <h2 className="card-title">{item.name}</h2>
-                                <p>{item.ptag}</p>
-                            </div>
-                        </div>
-                    )
-                }
+      <div className="my-20 px-4 lg:px-10">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10 uppercase">
+          Why Us
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !gap-4">
+          {whyUs.map((item) => (
+            <div
+              key={item.id}
+              className="card card-side  text-info shadow-xl bg-[#ECF9F8] hover:scale-105 transition-all px-3 py-1"
+            >
+              <figure>{item.icon}</figure>
+              <div className="card-body">
+                <h2 className="card-title">{item.name}</h2>
+                <p>{item.ptag}</p>
+              </div>
             </div>
+          ))}
         </div>
-    )
+      </div>
+    );
 }
 
 export default WhyUs

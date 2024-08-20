@@ -27,7 +27,7 @@ const Brand = () => {
 
   return (
     <>
-      <div className="my-10 px-4 lg:px-10 items-center">
+      <div className="my-10 px-4 lg:px-10 items-center mt-[100px]">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10 uppercase">
           {name}
         </h2>

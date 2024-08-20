@@ -2,8 +2,8 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="bg-transparent h-full md:h-screen grid place-items-center mt-[100px]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-transparent h-full md:h-screen grid place-items-center mt-[100px] max-w-7xl md:px-10">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">
             About Phone Garage

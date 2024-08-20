@@ -6,7 +6,8 @@ import Loading from "../Shared/Loading";
 
 const MyBooking = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  console.log("🚀 ~ MyBooking ~ user:", user)
+ 
   const {
     data: myItems = [],
     isLoading,
