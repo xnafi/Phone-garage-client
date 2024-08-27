@@ -24,6 +24,7 @@ const BrandCard = ({ item, setModalItem }) => {
 
   const handleModal = (item) => {
     setModalItem(item);
+    console.log(item);
   };
   return (
     <>
@@ -88,13 +89,13 @@ const BrandCard = ({ item, setModalItem }) => {
                   <p class="text-xs text-right">Post Date : {item?.postDate}</p>
                 </div>
 
-                <button
-                  onClick={() => handleModal(item)}
+                <label
+                  onClick={() => handleModal(item._id)}
                   htmlFor="booking-modal"
                   class="btn glass px-8 text-white"
                 >
                   Book Now
-                </button>
+                </label>
               </div>
             </div>
           </div>
