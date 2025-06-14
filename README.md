@@ -8,13 +8,13 @@ https://phone-garage-fc937.web.app/
 
 - You can see second hand mobile category.
 - You can buy Second Hand mobile as category.
-- You Can see verify sealer product.
+- You Can see verify seller product.
 - All type of user can report any product.
 - You can book any laptop, and after payment you will get your product.
 - All type of user can see myOrder.
-- Only sealer and admin can see myProduct (added any product)
-- Only sealer and admin added any product by category.
-- Only admin can see all Sealer / Buyers / reported Product.
+- Only seller and admin can see myProduct (added any product)
+- Only seller and admin added any product by category.
+- Only admin can see all Seller / Buyers / reported Product.
 - Account Create/Login/Logout.
 - Some Question Answer.
 - etc.
